@@ -50,6 +50,7 @@ class App {
     spotLight2.position.set(-500, -500, -500);
     this._scene.add(spotLight2);
 
+    this.addAxes();
     this.addTorus();
   }
 
@@ -109,6 +110,11 @@ class App {
     });
     this._torus = new THREE.Mesh(geometry, material);
     this._scene.add(this._torus);
+  }
+
+  addAxes() {
+    const axesHelper = new THREE.AxesHelper(5);
+    this._scene.add(axesHelper);
   }
 }
 
