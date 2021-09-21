@@ -10,6 +10,7 @@ class App {
   _camera;
   _scene;
   _controls;
+  _entities = []; // all geometry will be located here
 
   constructor() {
     this._Initialize();
@@ -25,7 +26,6 @@ class App {
 
   _SetRenderer() {
     this._renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
-    // window.addEventListener("resize", () => this._OnWindowResize(), false);
   }
 
   _SetCamera() {
@@ -50,8 +50,12 @@ class App {
     spotLight2.position.set(-500, -500, -500);
     this._scene.add(spotLight2);
 
-    this.addAxes();
-    this.addTorus();
+    this._entities = [this.AddTorus()];
+    this._entities.forEach((entity) => {
+      const axesHelper = new THREE.AxesHelper(2);
+      entity.add(axesHelper);
+      this._scene.add(entity);
+    });
   }
 
   _SetControls() {
@@ -80,9 +84,11 @@ class App {
 
   _Animate() {
     {
-      this._torus.rotation.x += 0.01;
-      this._torus.rotation.y += 0.005;
-      this._torus.rotation.z += 0.01;
+      this._entities.forEach((entity) => {
+        entity.rotation.x += 0.01;
+        entity.rotation.y += 0.005;
+        entity.rotation.z += 0.01;
+      });
     }
 
     const needResize = this._ResizeRendererToDisplaySize();
@@ -98,7 +104,7 @@ class App {
     requestAnimationFrame((time) => this._Animate());
   }
 
-  addTorus() {
+  AddTorus() {
     const geometry = new THREE.TorusGeometry(10, 3, 50, 100);
     const material = new THREE.MeshStandardMaterial({
       color: 0xfcc742,
@@ -108,13 +114,9 @@ class App {
       roughness: 0.55,
       // wireframe: true,
     });
-    this._torus = new THREE.Mesh(geometry, material);
-    this._scene.add(this._torus);
-  }
+    const torus = new THREE.Mesh(geometry, material);
 
-  addAxes() {
-    const axesHelper = new THREE.AxesHelper(5);
-    this._scene.add(axesHelper);
+    return torus;
   }
 }
 
