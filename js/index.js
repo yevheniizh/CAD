@@ -82,7 +82,9 @@ class App {
     return needResize;
   }
 
-  _Animate() {
+  _Animate(time) {
+    time *= 0.001; // get time in seconds
+
     {
       this._entities.forEach((entity) => {
         entity.rotation.x += 0.01;
@@ -101,7 +103,7 @@ class App {
     this._controls.update();
     this._renderer.render(this._scene, this._camera);
 
-    requestAnimationFrame((time) => this._Animate());
+    requestAnimationFrame(this._Animate.bind(this));
   }
 
   AddTorus() {
