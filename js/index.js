@@ -122,8 +122,4 @@ class App {
   }
 }
 
-let _APP = null;
-
-window.addEventListener("DOMContentLoaded", () => {
-  _APP = new App();
-});
+let _APP = new App();
