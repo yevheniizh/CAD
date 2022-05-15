@@ -1,3 +1,8 @@
+:root {
+  --gray-1: #eee;
+  --gray-2: #ccc;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -6,11 +11,32 @@ html,
 body {
   margin: 0;
   padding: 0;
+  width: 100%;
   height: 100%;
 }
 
-#canvas {
-  display: block;
-  height: 100%;
+.app {
+  display: flex;
   width: 100%;
+  height: 100%;
+  position: fixed;
+  inset: 0;
+}
+
+#canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.nav {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.colorpicker {
+  display: none;
 }

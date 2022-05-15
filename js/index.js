@@ -5,6 +5,21 @@ import { OrbitControls } from "./OrbitControls.js";
 // import * as THREE from "https://cdn.skypack.dev/three@0.132.2";
 // import { OrbitControls } from "https://cdn.skypack.dev/three@0.132.2/examples/jsm/controls/OrbitControls.js";
 
+window.config = {
+  background: '#ffffff',
+  wireframe: false,
+};
+
+/**
+ * 
+ * TODO: 
+ * 1) Create config shape (camera, scene, etc)
+ * 2) Add constants (colors, geometry, etc)
+ * 2) Add panels (geometry, light, animation?)
+ * 3) Add objects factory
+ * 
+ * */
+
 class App {
   _renderer;
   _camera;
@@ -12,10 +27,11 @@ class App {
   _controls;
   _entities = []; // all geometry will be located here
 
-  constructor() {
+  constructor( config = window.config ) {
+    this.config = config;
     this._Initialize();
   }
-
+  
   _Initialize() {
     this._SetRenderer();
     this._SetCamera();
@@ -37,9 +53,34 @@ class App {
     this._camera.position.set(0, 0, 25);
   }
 
+  /**
+   * @param {string} color HEX color
+   * @example '#ffffff'
+   * */
+  setBackground(color) {
+    if (this._scene) {
+      this._scene.background = new THREE.Color(color || this.config.background);
+      if (color) this.config.background = color;
+    } else {
+      console.log('Something went wrong while set background');
+    }
+  }
+
+  /**
+   * @param {boolean} value should show wireframe
+   * */
+  setWireframe(value = !this.config.wireframe) {
+    if (this._scene) {
+      this._entities.forEach(entity => entity.material.wireframe = value);
+      this.config.wireframe = value;
+    } else {
+      console.log('Something went wrong while set wireframe');
+    }
+  }
+
   _SetScene() {
     this._scene = new THREE.Scene();
-    this._scene.background = new THREE.Color(0xffffff);
+    this.setBackground();
     this._scene.fog = new THREE.FogExp2(0x89b2eb, 0.002); // fading geometry to a specific color based on the distance from the camera
 
     const spotLight = new THREE.SpotLight(0xeeeece);
@@ -103,7 +144,7 @@ class App {
     this._controls.update();
     this._renderer.render(this._scene, this._camera);
 
-    requestAnimationFrame(this._Animate.bind(this));
+    requestAnimationFrame(this._Animate.bind(this)); // starts animation loop
   }
 
   AddTorus() {
@@ -114,7 +155,7 @@ class App {
       specular: 0xffffff,
       metalness: 1,
       roughness: 0.55,
-      // wireframe: true,
+      wireframe: this.config.wireframe,
     });
     const torus = new THREE.Mesh(geometry, material);
 
@@ -122,4 +163,4 @@ class App {
   }
 }
 
-let _APP = new App();
+export default new App();
