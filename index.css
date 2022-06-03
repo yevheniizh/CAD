@@ -23,7 +23,7 @@ body {
   inset: 0;
 }
 
-#canvas {
+.canvas {
   position: absolute;
   inset: 0;
   display: block;

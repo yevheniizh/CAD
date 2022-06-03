@@ -15,12 +15,14 @@ window.config = {
  * TODO: 
  * 1) Create config shape (camera, scene, etc)
  * 2) Add constants (colors, geometry, etc)
- * 2) Add panels (geometry, light, animation?)
- * 3) Add objects factory
+ * 3) Add panels (geometry, light, animation?)
+ * 4) Add objects factory
+ * 5) Add cursor stylyng
  * 
  * */
 
 class App {
+  canvas;
   _renderer;
   _camera;
   _scene;
@@ -41,7 +43,8 @@ class App {
   }
 
   _SetRenderer() {
-    this._renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+    this.canvas = document.querySelector(".canvas");
+    this._renderer = new THREE.WebGLRenderer({ canvas: this.canvas, antialias: true });
   }
 
   _SetCamera() {
@@ -105,13 +108,12 @@ class App {
   }
 
   _ResizeRendererToDisplaySize() {
-    const canvas = document.querySelector("#canvas");
     const pixelRatio = window.devicePixelRatio;
-    const canvasWidth = (canvas.clientWidth * pixelRatio) | 0;
-    const canvasHeight = (canvas.clientHeight * pixelRatio) | 0;
+    const canvasWidth = (this.canvas.clientWidth * pixelRatio) | 0;
+    const canvasHeight = (this.canvas.clientHeight * pixelRatio) | 0;
 
     const needResize =
-      canvas.width !== canvasWidth || canvas.height !== canvasHeight;
+      this.canvas.width !== canvasWidth || this.canvas.height !== canvasHeight;
     if (needResize) {
       const updateStyle = false; // prevents style changes to the output canvas
       this._renderer.setSize(canvasWidth, canvasHeight, updateStyle);
@@ -136,8 +138,7 @@ class App {
 
     const needResize = this._ResizeRendererToDisplaySize();
     if (needResize) {
-      const canvas = this._renderer.domElement;
-      this._camera.aspect = canvas.clientWidth / canvas.clientHeight;
+      this._camera.aspect = this.canvas.clientWidth / this.canvas.clientHeight;
       this._camera.updateProjectionMatrix(); // doesn't distort view when resize
     }
 

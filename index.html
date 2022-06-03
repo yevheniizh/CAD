@@ -12,6 +12,7 @@
 
     <!-- JS -->
     <script defer type="module" src="./js/index.js"></script>
+    <script defer type="module" src="./js/main.js"></script>
     <script defer type="module" src="./components/accordion/index.js"></script>
     <script defer type="module" src="./components/colorpicker/index.js"></script>
     
@@ -24,17 +25,17 @@
     <div class="app">
       
       <!-- 3D area -->
-      <canvas id="canvas"></canvas>
+      <canvas class="canvas"></canvas>
 
       <!-- Tools panel -->
       <nav class="nav">
         <button class="accordion">View</button>
         <ul class="panel">
           <li>
-            <button>Show axes</button>
+            <button class='button'>Show axes</button>
           </li>
           <li>
-            <button>Reset view</button>
+            <button class='button'>Reset view</button>
           </li>
           <li>
             <button class='button background'>Background</button>
@@ -46,10 +47,10 @@
             <button class='button wireframe'>Wireframe</button>
           </li>
           <li>
-            <button>Ground</button>
+            <button class='button'>Ground</button>
           </li>
           <li>
-            <button>Animate</button>
+            <button class='button'>Animate</button>
           </li>
         </ul>
       </nav>
