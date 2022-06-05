@@ -1,4 +1,4 @@
-.accordion {
+.accordion-button {
   background-color: var( --gray-1 );
   color: #444;
   cursor: pointer;
@@ -11,11 +11,11 @@
   transition: 0.4s;
 }
 
-.accordion.active, .accordion:hover {
+.accordion-button.active, .accordion-button:hover {
   background-color: var( --gray-2 );;
 }
 
-.accordion:after {
+.accordion-button:after {
   content: "\002B";
   color: #777;
   font-weight: bold;
@@ -23,15 +23,15 @@
   margin-left: 5px;
 }
 
-.accordion.active:after {
+.accordion-button.active:after {
   content: "\2212";
 }
 
-.accordion.active + .panel {
-  border: 1px solid black;
+.accordion-button.active + .accordion-body {
+  border-color: black;
 }
 
-.panel {
+.accordion-body {
   border: 1px solid transparent;
   border-radius: 5px;
   padding: 0 18px;
