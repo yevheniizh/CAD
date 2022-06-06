@@ -1,0 +1,38 @@
+.nav-area {
+}
+
+.nav-area-button {
+  background-color: var( --gray-1 );
+  color: var( --gray-4 );
+  padding: 18px;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.nav-area-button.active, .nav-area-button:hover {
+  background-color: var( --gray-2 );
+}
+
+.nav-area-button:after {
+  content: "\002B"; /* "+" */
+  color: var( --gray-3 );
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
+}
+
+.nav-area-button.active:after {
+  content: "\2212"; /* "-" */
+}
+
+.nav-area-button.active + .nav-area-body {
+  background-color: var( --gray-1 );
+  padding: 8px 18px;
+}
+
+.nav-area-body {
+  padding: 0 18px;
+  margin: 0;
+}

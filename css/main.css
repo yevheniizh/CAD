@@ -1,6 +1,9 @@
 :root {
+  --black: #292929;
   --gray-1: #eee;
   --gray-2: #ccc;
+  --gray-3: #777;
+  --gray-4: #444;
 }
 
 * {
@@ -16,11 +19,11 @@ body {
 }
 
 .app {
+  position: relative;
+  inset: 0;
   display: flex;
   width: 100%;
   height: 100%;
-  position: fixed;
-  inset: 0;
 }
 
 .canvas {
@@ -33,10 +36,19 @@ body {
 
 .nav-area {
   position: absolute;
-  top: 20px;
-  left: 20px;
+  inset: 15px;
+  width: 200px;
+  backdrop-filter: blur(15px);
+  border-radius: 10px;
+  border: 1px solid var(--gray-2);
+  overflow: scroll;
 }
 
-.colorpicker {
-  display: none;
+.nav-area::after {
+  position: absolute;
+  inset: 0;
+  content: '';
+  background-color: var(--gray-2);
+  opacity: 0.2;
+  z-index: -1;
 }

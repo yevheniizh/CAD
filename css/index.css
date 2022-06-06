@@ -2,4 +2,7 @@
 @import './main.css';
 
 /* Components */
-@import '../components/accordion/index.css'
+@import '../components/accordion/index.css';
+
+/* Containers */
+@import '../containers/nav-area/index.css';

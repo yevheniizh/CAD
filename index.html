@@ -11,9 +11,7 @@
     <title>Threejs Example</title>
 
     <!-- JS -->
-    <script defer type="module" src="./components/canvas/index.js"></script>
-    <script defer type="module" src="./components/accordion/index.js"></script>
-    <script defer type="module" src="./components/colorpicker/index.js"></script>
+    <script defer type="module" src="./index.js"></script>
     
     <!-- CSS -->
     <link rel="stylesheet" href="./css/index.css"></link>
@@ -26,24 +24,24 @@
       <canvas class="canvas"></canvas>
 
       <!-- Tools panel -->
-      <nav class="nav-area accordion">
-        <div class="view-nav accordion-item">
-          <button class="button accordion-button">View</button>
-          <ul class="panel accordion-body">
-            <li>
+      <nav class="nav-area">
+        <div class="nav-view-category">
+          <button class="button accordion-button nav-area-button">View</button>
+          <ul class="accordion-body nav-area-body">
+            <li class="nav-item">
               <button class='button'>Show axes</button>
             </li>
             <li>
               <button class='button'>Reset view</button>
             </li>
             <li>
-              <button class='button background'>Background</button>
-              <div class='colorpicker'>
+              <button class='button accordion-button'>Background</button>
+              <div class='colorpicker accordion-body'>
                 <input class='color-input' type='color' />
               </div>
             </li>
             <li>
-              <button class='button wireframe'>Wireframe</button>
+              <button class='button view-wireframe'>Wireframe</button>
             </li>
             <li>
               <button class='button'>Ground</button>
