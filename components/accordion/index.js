@@ -1,14 +1,13 @@
-import App from "../../js/index.js";
+import Canvas from "../canvas/index.js";
+import { app } from "../../constants/DOM.js";
 
-const navArea = document.querySelector(".nav-area");
+// Delegate to expand/collapse accordion to all accordion buttons
+app.addEventListener("click", ( e ) => {
+  const accordionButton = e.target.closest(".accordion-button");
 
-// Delegate to expand/collapse accordion to all nav-area buttons
-navArea.addEventListener("click", ( e ) => {
-  const navButton = e.target.closest(".accordion-button");
-
-  if (navButton) {
-    navButton.classList.toggle("active");
-    const panel = navButton.nextElementSibling;
+  if (accordionButton) {
+    accordionButton.classList.toggle("active");
+    const panel = accordionButton.nextElementSibling;
 
     if (panel.style.maxHeight) {
       panel.style.maxHeight = null;
@@ -19,5 +18,5 @@ navArea.addEventListener("click", ( e ) => {
 } )
 
 // Wireframe button
-const button = document.querySelector(".button.wireframe");
-button.addEventListener("click", () => App.setWireframe());
+const wireframeButton = document.querySelector(".button.wireframe");
+wireframeButton.addEventListener("click", () => Canvas.setWireframe());

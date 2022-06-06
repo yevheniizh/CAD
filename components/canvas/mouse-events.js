@@ -1,5 +1,8 @@
-const canvas = document.querySelector('.canvas');
+import { canvas } from "../../constants/DOM.js";
 
+/**
+ * Zoom - zoom-in / zoom-out cursor
+ */
 let isScrolling;
 
 function zoom(e) {
@@ -8,13 +11,17 @@ function zoom(e) {
 	isScrolling = setTimeout( () => canvas.style.cursor = 'auto', 50 );
 }
 
-// Chrome, Firefox scroll event
+// Scroll events - Chrome, Firefox 
 canvas.addEventListener( 'wheel', zoom );
-// Safari scroll events
+// Scroll events - Safari
 canvas.addEventListener('gesturestart', zoom);
 canvas.addEventListener('gesturechange', zoom);
 canvas.addEventListener('gestureend', zoom);
 
+/**
+ * Orbit - alias cursor
+ * Pan - move cursor
+ */
 canvas.addEventListener( 'mousedown', ( e ) => {
   switch (e.button) {
     case 0:

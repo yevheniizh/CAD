@@ -12,7 +12,7 @@
 }
 
 .accordion-button.active, .accordion-button:hover {
-  background-color: var( --gray-2 );;
+  background-color: var( --gray-2 );
 }
 
 .accordion-button:after {

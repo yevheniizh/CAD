@@ -1,5 +1,5 @@
-import * as THREE from "./three.module.js";
-import { OrbitControls } from "./OrbitControls.js";
+import * as THREE from "./threejs/three.module.js";
+import { OrbitControls } from "./threejs/OrbitControls.js";
 
 /* ALTERNATIVE IMPORT */
 // import * as THREE from "https://cdn.skypack.dev/three@0.132.2";
@@ -17,11 +17,11 @@ window.config = {
  * 2) Add constants (colors, geometry, etc)
  * 3) Add panels (geometry, light, animation?)
  * 4) Add objects factory
- * 5) Add cursor stylyng
+ * 5) Add special context menu? -> shortcuts
  * 
  * */
 
-class App {
+class Canvas {
   canvas;
   _renderer;
   _camera;
@@ -164,4 +164,4 @@ class App {
   }
 }
 
-export default new App();
+export default new Canvas();
