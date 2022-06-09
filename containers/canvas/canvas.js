@@ -93,13 +93,6 @@ class Canvas {
     const spotLight2 = new THREE.SpotLight(0xddddce);
     spotLight2.position.set(-500, -500, -500);
     this._scene.add(spotLight2);
-
-    this._entities = [this.AddTorus()];
-    this._entities.forEach((entity) => {
-      const axesHelper = new THREE.AxesHelper(2);
-      entity.add(axesHelper);
-      this._scene.add(entity);
-    });
   }
 
   _SetControls() {
@@ -146,21 +139,6 @@ class Canvas {
     this._renderer.render(this._scene, this._camera);
 
     requestAnimationFrame(this._Animate.bind(this)); // starts animation loop
-  }
-
-  AddTorus() {
-    const geometry = new THREE.TorusGeometry(10, 3, 50, 100);
-    const material = new THREE.MeshStandardMaterial({
-      color: 0xfcc742,
-      emissive: 0x111111,
-      specular: 0xffffff,
-      metalness: 1,
-      roughness: 0.55,
-      wireframe: this.config.wireframe,
-    });
-    const torus = new THREE.Mesh(geometry, material);
-
-    return torus;
   }
 }
 
