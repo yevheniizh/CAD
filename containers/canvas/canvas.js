@@ -121,13 +121,11 @@ class Canvas {
   _Animate(time) {
     time *= 0.001; // get time in seconds
 
-    {
-      this._entities.forEach((entity) => {
-        entity.rotation.x += 0.01;
-        entity.rotation.y += 0.005;
-        entity.rotation.z += 0.01;
-      });
-    }
+    this._entities.forEach((entity) => {
+      entity.rotation.x += 0.01;
+      entity.rotation.y += 0.005;
+      entity.rotation.z += 0.01;
+    });
 
     const needResize = this._ResizeRendererToDisplaySize();
     if (needResize) {

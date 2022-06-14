@@ -2,8 +2,8 @@ import { FiguresGenerator } from "../canvas/figuresGenerator.js";
 import Canvas from "../canvas/index.js";
 
 // Wireframe button
-const wireframeButton = document.querySelector(".button.view-wireframe");
-wireframeButton.addEventListener("click", () => Canvas.setWireframe());
+document.querySelector(".button.view-wireframe")
+  .addEventListener("click", () => Canvas.setWireframe());
 
 // Colorpicker button
 const colorpicker = document.querySelector(".colorpicker .color-input");
@@ -11,8 +11,8 @@ colorpicker.value = window.config.background;
 colorpicker.addEventListener("change", (e) => Canvas.setBackground(e.target.value));
 
 // Add figure button
-const addFigureButton = document.querySelector(".figure");
-addFigureButton.addEventListener("click", () => FiguresGenerator.addBox( {
+document.querySelector(".figure")
+  .addEventListener("click", () => FiguresGenerator.addBox( {
     geometry: {
       width: 20,
       height: 30,
@@ -47,3 +47,7 @@ addFigureButton.addEventListener("click", () => FiguresGenerator.addBox( {
 //     },
 //   } )
 // );
+
+// Remove all figures button
+document.querySelector(".view-clear")
+  .addEventListener("click", () => FiguresGenerator.removeAll());
