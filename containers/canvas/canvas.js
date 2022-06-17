@@ -1,6 +1,8 @@
 import * as THREE from "./threejs/three.module.js";
 import { OrbitControls } from "./threejs/OrbitControls.js";
 
+import { SceneConfigurator } from "./sceneConfigurator.js";
+
 /* ALTERNATIVE IMPORT */
 // import * as THREE from "https://cdn.skypack.dev/three@0.132.2";
 // import { OrbitControls } from "https://cdn.skypack.dev/three@0.132.2/examples/jsm/controls/OrbitControls.js";
@@ -18,32 +20,34 @@ window.config = {
  * 3) Add panels (geometry, light, animation?)
  * 4) Add objects factory
  * 5) Add special context menu? -> shortcuts
+ * 6) Camera type (perspective, orthogonal)
  * 
  * */
 
 class Canvas {
-  canvas;
+  canvas = document.querySelector(".canvas");
   _renderer;
   _camera;
-  _scene;
   _controls;
   _entities = []; // all geometry will be located here
 
   constructor( config = window.config ) {
     this.config = config;
+
+    this.SceneConfigurator = new SceneConfigurator(this);
+    this.scene = this.SceneConfigurator.scene;
+
     this._Initialize();
   }
   
   _Initialize() {
     this._SetRenderer();
     this._SetCamera();
-    this._SetScene();
     this._SetControls();
     this._Animate();
   }
 
   _SetRenderer() {
-    this.canvas = document.querySelector(".canvas");
     this._renderer = new THREE.WebGLRenderer({ canvas: this.canvas, antialias: true });
   }
 
@@ -54,45 +58,6 @@ class Canvas {
     const far = 1000.0;
     this._camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
     this._camera.position.set(0, 0, 25);
-  }
-
-  /**
-   * @param {string} color HEX color
-   * @example '#ffffff'
-   * */
-  setBackground(color) {
-    if (this._scene) {
-      this._scene.background = new THREE.Color(color || this.config.background);
-      if (color) this.config.background = color;
-    } else {
-      console.log('Something went wrong while set background');
-    }
-  }
-
-  /**
-   * @param {boolean} value should show wireframe
-   * */
-  setWireframe(value = !this.config.wireframe) {
-    if (this._scene) {
-      this._entities.forEach(entity => entity.material.wireframe = value);
-      this.config.wireframe = value;
-    } else {
-      console.log('Something went wrong while set wireframe');
-    }
-  }
-
-  _SetScene() {
-    this._scene = new THREE.Scene();
-    this.setBackground();
-    this._scene.fog = new THREE.FogExp2(0x89b2eb, 0.002); // fading geometry to a specific color based on the distance from the camera
-
-    const spotLight = new THREE.SpotLight(0xeeeece);
-    spotLight.position.set(1000, 1000, 1000);
-    this._scene.add(spotLight);
-
-    const spotLight2 = new THREE.SpotLight(0xddddce);
-    spotLight2.position.set(-500, -500, -500);
-    this._scene.add(spotLight2);
   }
 
   _SetControls() {
@@ -134,7 +99,7 @@ class Canvas {
     }
 
     this._controls.update();
-    this._renderer.render(this._scene, this._camera);
+    this._renderer.render(this.scene, this._camera);
 
     requestAnimationFrame(this._Animate.bind(this)); // starts animation loop
   }

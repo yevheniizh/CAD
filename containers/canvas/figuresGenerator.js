@@ -5,12 +5,12 @@ import Canvas from "./canvas.js";
 export class FiguresGenerator {
   static addFigure(figure) {
     Canvas._entities = [...Canvas._entities, figure];
-    Canvas._scene.add(figure.add(new THREE.AxesHelper(2)));
+    Canvas.scene.add(figure.add(new THREE.AxesHelper(2)));
   }
 
   static removeAll() {
     // NOTE: '.clear()' also works, but removes all the light settings
-    Canvas._entities.forEach(figure => Canvas._scene.remove(figure));
+    Canvas._entities.forEach(figure => Canvas.scene.remove(figure));
     Canvas._entities = [];
   }
 

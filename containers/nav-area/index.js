@@ -1,14 +1,14 @@
-import { FiguresGenerator } from "../canvas/figuresGenerator.js";
 import Canvas from "../canvas/index.js";
+import { FiguresGenerator } from "../canvas/figuresGenerator.js";
 
 // Wireframe button
 document.querySelector(".button.view-wireframe")
-  .addEventListener("click", () => Canvas.setWireframe());
+  .addEventListener("click", () => Canvas.SceneConfigurator.setWireframe());
 
 // Colorpicker button
 const colorpicker = document.querySelector(".colorpicker .color-input");
 colorpicker.value = window.config.background;
-colorpicker.addEventListener("change", (e) => Canvas.setBackground(e.target.value));
+colorpicker.addEventListener("change", (e) => Canvas.SceneConfigurator.setBackground(e.target.value));
 
 // Add figure button
 document.querySelector(".figure")
