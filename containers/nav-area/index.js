@@ -1,5 +1,6 @@
 import Canvas from "../canvas/index.js";
-import { FiguresGenerator } from "../canvas/figuresGenerator.js";
+
+import { primitives, materials } from "../canvas/geometryConfigurator.js";
 
 // Wireframe button
 document.querySelector(".button.view-wireframe")
@@ -11,43 +12,57 @@ colorpicker.value = window.config.background;
 colorpicker.addEventListener("change", (e) => Canvas.SceneConfigurator.setBackground(e.target.value));
 
 // Add figure button
-document.querySelector(".figure")
-  .addEventListener("click", () => FiguresGenerator.addBox( {
-    geometry: {
-      width: 20,
-      height: 30,
-      depth: 15,
-      widthSegments: 40,
-      heightSegments: 60,
-      depthSegments: 30,
-    },
-    material: {
-      color: 0xfcc742,
-      emissive: 0x111111,
-      metalness: 1,
-      roughness: 0.55,
-      wireframe: window.config.wireframe,
-    },
-  } )
-);
-
-// addFigureButton.addEventListener("click", () => FiguresGenerator.addTorus( {
+// document.querySelector(".figure")
+//   .addEventListener("click", () => Canvas.GeometryConfigurator.addPrimitive( {
 //     geometry: {
-//       radius: 10,
-//       tube: 3,
-//       radialSegments: 50,
-//       tubularSegments: 100,
+//       type: primitives.box,
+//       props: {
+//         width: 20,
+//         height: 30,
+//         depth: 15,
+//         widthSegments: 40,
+//         heightSegments: 60,
+//         depthSegments: 30,
+//       },
 //     },
 //     material: {
-//       color: 0xfcc742,
-//       emissive: 0x111111,
-//       metalness: 1,
-//       roughness: 0.55,
-//       wireframe: window.config.wireframe,
+//       type: materials.standart,
+//       props: {
+//         color: 0xfcc742,
+//         emissive: 0x111111,
+//         metalness: 1,
+//         roughness: 0.55,
+//         wireframe: window.config.wireframe,
+//       }
 //     },
 //   } )
 // );
 
-// Remove all figures button
+// Add figure button
+document.querySelector(".figure")
+  .addEventListener("click", () => Canvas.GeometryConfigurator.addPrimitive( {
+    geometry: {
+      type: primitives.torus,
+      props: {
+        radius: 10,
+        tube: 3,
+        radialSegments: 50,
+        tubularSegments: 100,
+      }
+    },
+    material: {
+      type: materials.standart,
+      props: {
+        color: 0xfcc742,
+        emissive: 0x111111,
+        metalness: 1,
+        roughness: 0.55,
+        wireframe: window.config.wireframe,
+      }
+    },
+  } )
+);
+
+// Remove all geometry button
 document.querySelector(".view-clear")
-  .addEventListener("click", () => FiguresGenerator.removeAll());
+  .addEventListener("click", () => Canvas.GeometryConfigurator.removeAll());

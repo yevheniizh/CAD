@@ -2,6 +2,7 @@ import * as THREE from "./threejs/three.module.js";
 import { OrbitControls } from "./threejs/OrbitControls.js";
 
 import { SceneConfigurator } from "./sceneConfigurator.js";
+import { GeometryConfigurator } from "./geometryConfigurator.js";
 
 /* ALTERNATIVE IMPORT */
 // import * as THREE from "https://cdn.skypack.dev/three@0.132.2";
@@ -34,6 +35,7 @@ class Canvas {
   constructor( config = window.config ) {
     this.config = config;
 
+    this.GeometryConfigurator = new GeometryConfigurator(this);
     this.SceneConfigurator = new SceneConfigurator(this);
     this.scene = this.SceneConfigurator.scene;
 
