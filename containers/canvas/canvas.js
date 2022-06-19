@@ -3,6 +3,7 @@ import { OrbitControls } from "./threejs/OrbitControls.js";
 
 import { SceneConfigurator } from "./sceneConfigurator.js";
 import { GeometryConfigurator } from "./geometryConfigurator.js";
+import { AnimationConfigurator } from "./animationConfigurator.js";
 
 /* ALTERNATIVE IMPORT */
 // import * as THREE from "https://cdn.skypack.dev/three@0.132.2";
@@ -26,84 +27,56 @@ window.config = {
  * */
 
 class Canvas {
-  canvas = document.querySelector(".canvas");
+  domElement = document.querySelector(".canvas");
+
   _renderer;
   _camera;
   _controls;
+
+  SceneConfigurator;
+  scene;
+
+  AnimationConfigurator;
+
   _entities = []; // all geometry will be located here
 
   constructor( config = window.config ) {
     this.config = config;
-
-    this.GeometryConfigurator = new GeometryConfigurator(this);
-    this.SceneConfigurator = new SceneConfigurator(this);
-    this.scene = this.SceneConfigurator.scene;
-
     this._Initialize();
   }
   
   _Initialize() {
-    this._SetRenderer();
+    // Geometry
+    this.GeometryConfigurator = new GeometryConfigurator(this);
+
+    // Scene
+    this.SceneConfigurator = new SceneConfigurator(this);
+    this.scene = this.SceneConfigurator.scene;
+
+    // Camera
     this._SetCamera();
+
+    // Renderer
+    this._SetRenderer();
+
+    // Controls 
     this._SetControls();
-    this._Animate();
+
+    // Animation
+    this.AnimationConfigurator = new AnimationConfigurator(this);
   }
 
   _SetRenderer() {
-    this._renderer = new THREE.WebGLRenderer({ canvas: this.canvas, antialias: true });
+    this._renderer = new THREE.WebGLRenderer({ canvas: this.domElement, antialias: true });
   }
 
   _SetCamera() {
-    const fov = 75;
-    const aspect = 2; // the canvas default
-    const near = 0.1;
-    const far = 1000.0;
-    this._camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+    this._camera = new THREE.PerspectiveCamera(75, 2, 0.1, 1000.0);
     this._camera.position.set(0, 0, 25);
   }
 
   _SetControls() {
-    const canvas = this._renderer.domElement;
-    this._controls = new OrbitControls(this._camera, canvas);
-  }
-
-  _ResizeRendererToDisplaySize() {
-    const pixelRatio = window.devicePixelRatio;
-    const canvasWidth = (this.canvas.clientWidth * pixelRatio) | 0;
-    const canvasHeight = (this.canvas.clientHeight * pixelRatio) | 0;
-
-    const needResize =
-      this.canvas.width !== canvasWidth || this.canvas.height !== canvasHeight;
-    if (needResize) {
-      const updateStyle = false; // prevents style changes to the output canvas
-      this._renderer.setSize(canvasWidth, canvasHeight, updateStyle);
-
-      /* ALTERNATIVE WAY TO SET PIXEL RATIO */
-      // this._renderer.setPixelRatio(pixelRatio)
-    }
-
-    return needResize;
-  }
-
-  _Animate(time) {
-    time *= 0.001; // get time in seconds
-
-    this._entities.forEach((entity) => {
-      entity.rotation.x += 0.01;
-      entity.rotation.y += 0.005;
-      entity.rotation.z += 0.01;
-    });
-
-    const needResize = this._ResizeRendererToDisplaySize();
-    if (needResize) {
-      this._camera.aspect = this.canvas.clientWidth / this.canvas.clientHeight;
-      this._camera.updateProjectionMatrix(); // doesn't distort view when resize
-    }
-
-    this._controls.update();
-    this._renderer.render(this.scene, this._camera);
-
-    requestAnimationFrame(this._Animate.bind(this)); // starts animation loop
+    this._controls = new OrbitControls(this._camera, this.domElement);
   }
 }
 
