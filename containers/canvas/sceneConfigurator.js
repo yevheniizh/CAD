@@ -1,4 +1,5 @@
 import * as THREE from "./threejs/three.module.js";
+import { catchError } from '../error/index.js';
 
 export class SceneConfigurator {
   scene;
@@ -10,7 +11,8 @@ export class SceneConfigurator {
 
   setScene() {
     this.scene = new THREE.Scene();
-    this.setBackground();
+
+    catchError(this.setBackground.bind(this))();
     this.scene.fog = new THREE.FogExp2( 0x89b2eb, 0.002 ); // fading geometry to a specific color based on the distance from the camera
 
     this.setLight(0xeeeece, {x: 1000, y: 1000, z: 1000} );
@@ -24,20 +26,16 @@ export class SceneConfigurator {
   }
 
   setBackground( color ) {
-    if ( this.scene ) {
-      if ( color ) window.config.background = color;
-      this.scene.background = new THREE.Color( color || this.canvas.config.background );
-    } else {
-      console.log( 'Something went wrong while set background' );
-    }
+    if ( !this.scene ) throw Error;
+
+    if ( color ) window.config.background = color;
+    this.scene.background = new THREE.Color( color || this.canvas.config.background );
   }
 
   setWireframe( value = !window.config.wireframe ) {
-    if ( this.scene ) {
-      this.canvas._entities.forEach( entity => entity.material.wireframe = value );
-      window.config.wireframe = value;
-    } else {
-      console.log( 'Something went wrong while set wireframe' );
-    }
+    if ( !this.scene ) throw Error;
+
+    this.canvas._entities.forEach( entity => entity.material.wireframe = value );
+    window.config.wireframe = value;
   }
 }
