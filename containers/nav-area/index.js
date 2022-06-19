@@ -1,6 +1,6 @@
 import Canvas from "../canvas/index.js";
 
-import { primitives, materials } from "../canvas/geometryConfigurator.js";
+import { primitivesMap, materialsMap } from "../canvas/maps.js";
 
 // Wireframe button
 document.querySelector(".button.view-wireframe")
@@ -12,10 +12,10 @@ colorpicker.value = window.config.background;
 colorpicker.addEventListener("change", (e) => Canvas.SceneConfigurator.setBackground(e.target.value));
 
 // Add figure button
-// document.querySelector(".figure")
+// document.querySelector(".view-figure")
 //   .addEventListener("click", () => Canvas.GeometryConfigurator.addPrimitive( {
 //     geometry: {
-//       type: primitives.box,
+//       type: primitivesMap.box,
 //       props: {
 //         width: 20,
 //         height: 30,
@@ -26,7 +26,7 @@ colorpicker.addEventListener("change", (e) => Canvas.SceneConfigurator.setBackgr
 //       },
 //     },
 //     material: {
-//       type: materials.standart,
+//       type: materialsMap.standart,
 //       props: {
 //         color: 0xfcc742,
 //         emissive: 0x111111,
@@ -39,10 +39,10 @@ colorpicker.addEventListener("change", (e) => Canvas.SceneConfigurator.setBackgr
 // );
 
 // Add figure button
-document.querySelector(".figure")
+document.querySelector(".view-figure")
   .addEventListener("click", () => Canvas.GeometryConfigurator.addPrimitive( {
     geometry: {
-      type: primitives.torus,
+      type: primitivesMap.torus,
       props: {
         radius: 10,
         tube: 3,
@@ -51,7 +51,7 @@ document.querySelector(".figure")
       }
     },
     material: {
-      type: materials.standart,
+      type: materialsMap.standart,
       props: {
         color: 0xfcc742,
         emissive: 0x111111,
@@ -66,3 +66,7 @@ document.querySelector(".figure")
 // Remove all geometry button
 document.querySelector(".view-clear")
   .addEventListener("click", () => Canvas.GeometryConfigurator.removeAll());
+
+// Remove all geometry button
+document.querySelector(".view-animation")
+  .addEventListener("click", () => Canvas.AnimationConfigurator.toggleAnimation());

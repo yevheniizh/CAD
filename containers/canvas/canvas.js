@@ -4,6 +4,7 @@ import { OrbitControls } from "./threejs/OrbitControls.js";
 import { SceneConfigurator } from "./sceneConfigurator.js";
 import { GeometryConfigurator } from "./geometryConfigurator.js";
 import { AnimationConfigurator } from "./animationConfigurator.js";
+import { CameraConfigurator } from "./cameraConfigurator.js";
 
 /* ALTERNATIVE IMPORT */
 // import * as THREE from "https://cdn.skypack.dev/three@0.132.2";
@@ -29,9 +30,11 @@ window.config = {
 class Canvas {
   domElement = document.querySelector(".canvas");
 
-  _renderer;
-  _camera;
-  _controls;
+  renderer;
+  controls;
+  
+  CameraConfigurator
+  camera;
 
   SceneConfigurator;
   scene;
@@ -46,37 +49,32 @@ class Canvas {
   }
   
   _Initialize() {
-    // Geometry
-    this.GeometryConfigurator = new GeometryConfigurator(this);
-
+    // Renderer
+    this._SetRenderer();
+    
     // Scene
     this.SceneConfigurator = new SceneConfigurator(this);
     this.scene = this.SceneConfigurator.scene;
-
+    
     // Camera
-    this._SetCamera();
-
-    // Renderer
-    this._SetRenderer();
-
+    this.CameraConfigurator = new CameraConfigurator(this);
+    
     // Controls 
     this._SetControls();
+    
+    // Geometry
+    this.GeometryConfigurator = new GeometryConfigurator(this);
 
     // Animation
     this.AnimationConfigurator = new AnimationConfigurator(this);
   }
 
   _SetRenderer() {
-    this._renderer = new THREE.WebGLRenderer({ canvas: this.domElement, antialias: true });
-  }
-
-  _SetCamera() {
-    this._camera = new THREE.PerspectiveCamera(75, 2, 0.1, 1000.0);
-    this._camera.position.set(0, 0, 25);
+    this.renderer = new THREE.WebGLRenderer({ canvas: this.domElement, antialias: true });
   }
 
   _SetControls() {
-    this._controls = new OrbitControls(this._camera, this.domElement);
+    this.controls = new OrbitControls(this.camera, this.domElement);
   }
 }
 

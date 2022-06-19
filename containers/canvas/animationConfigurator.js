@@ -2,25 +2,31 @@ export class AnimationConfigurator {
   constructor( canvas ) {
     this.canvas = canvas;
     this._Animate();
+
+    this.config = {
+      x: 0.01,
+      y: 0.005,
+      z: 0.01,
+    }
   }
 
   _Animate(time) {
     time *= 0.001; // get time in seconds
 
     this.canvas._entities.forEach((entity) => {
-      entity.rotation.x += 0.01;
-      entity.rotation.y += 0.005;
-      entity.rotation.z += 0.01;
+      entity.rotation.x += this.config.x;
+      entity.rotation.y += this.config.y;
+      entity.rotation.z += this.config.z;
     });
 
     const needResize = this._ResizeRendererToDisplaySize();
     if (needResize) {
-      this.canvas._camera.aspect = this.canvas.domElement.clientWidth / this.canvas.domElement.clientHeight;
-      this.canvas._camera.updateProjectionMatrix(); // doesn't distort view when resize
+      this.canvas.camera.aspect = this.canvas.domElement.clientWidth / this.canvas.domElement.clientHeight;
+      this.canvas.camera.updateProjectionMatrix(); // doesn't distort view when resize
     }
 
-    this.canvas._controls.update();
-    this.canvas._renderer.render(this.canvas.scene, this.canvas._camera);
+    this.canvas.controls.update();
+    this.canvas.renderer.render(this.canvas.scene, this.canvas.camera);
 
     requestAnimationFrame(this._Animate.bind(this)); // starts animation loop
   }
@@ -34,12 +40,28 @@ export class AnimationConfigurator {
       this.canvas.domElement.width !== canvasWidth || this.canvas.domElement.height !== canvasHeight;
     if (needResize) {
       const updateStyle = false; // prevents style changes to the output canvas
-      this.canvas._renderer.setSize(canvasWidth, canvasHeight, updateStyle);
+      this.canvas.renderer.setSize(canvasWidth, canvasHeight, updateStyle);
 
       /* ALTERNATIVE WAY TO SET PIXEL RATIO */
-      // this.canvas._renderer.setPixelRatio(pixelRatio)
+      // this.canvas.renderer.setPixelRatio(pixelRatio)
     }
 
     return needResize;
+  }
+
+  toggleAnimation() {
+    this.config = (
+      this.config.x === 0
+        ? {
+            x: 0.01,
+            y: 0.005,
+            z: 0.01,
+          }
+        : {
+            x: 0,
+            y: 0,
+            z: 0,
+          }
+    );
   }
 }

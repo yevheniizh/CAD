@@ -1,18 +1,5 @@
 import * as THREE from "./threejs/three.module.js";
 
-export const primitives = {
-  box: THREE.BoxGeometry,
-  cone: THREE.ConeGeometry,
-  torus: THREE.TorusGeometry,
-  sphere: THREE.SphereGeometry,
-}
-
-export const materials = {
-  basic: THREE.MeshBasicMaterial,
-  lambert: THREE.MeshLambertMaterial,
-  standart: THREE.MeshStandardMaterial,
-}
-
 export class GeometryConfigurator {
   constructor(canvas){
     this.canvas = canvas;
