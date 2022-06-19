@@ -1,5 +1,5 @@
 import * as THREE from "./threejs/three.module.js";
-import { catchError } from '../error/index.js';
+import { catchError } from '../../utils/error.util.js';
 
 export class SceneConfigurator {
   scene;
@@ -35,7 +35,7 @@ export class SceneConfigurator {
   setWireframe( value = !window.config.wireframe ) {
     if ( !this.scene ) throw Error;
 
-    this.canvas._entities.forEach( entity => entity.material.wireframe = value );
+    this.canvas.entities.forEach( entity => entity.material.wireframe = value );
     window.config.wireframe = value;
   }
 }

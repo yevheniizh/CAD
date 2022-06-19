@@ -6,14 +6,14 @@ export class GeometryConfigurator {
   }
 
   injectFigure(figure) {
-    this.canvas._entities = [...this.canvas._entities, figure];
+    this.canvas.entities = [...this.canvas.entities, figure];
     this.canvas.scene.add(figure.add(new THREE.AxesHelper(2)));
   }
 
   removeAll() {
     // NOTE: '.clear()' also works, but removes all the light settings
-    this.canvas._entities.forEach(figure => this.canvas.scene.remove(figure));
-    this.canvas._entities = [];
+    this.canvas.entities.forEach(figure => this.canvas.scene.remove(figure));
+    this.canvas.entities = [];
   }
 
   addPrimitive( {geometry, material} ) {

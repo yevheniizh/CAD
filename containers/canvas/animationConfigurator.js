@@ -1,7 +1,7 @@
 export class AnimationConfigurator {
   constructor( canvas ) {
     this.canvas = canvas;
-    this._Animate();
+    this.Animate();
 
     this.config = {
       x: 0.01,
@@ -10,16 +10,16 @@ export class AnimationConfigurator {
     }
   }
 
-  _Animate(time) {
+  Animate(time) {
     time *= 0.001; // get time in seconds
 
-    this.canvas._entities.forEach((entity) => {
+    this.canvas.entities.forEach((entity) => {
       entity.rotation.x += this.config.x;
       entity.rotation.y += this.config.y;
       entity.rotation.z += this.config.z;
     });
 
-    const needResize = this._ResizeRendererToDisplaySize();
+    const needResize = this.ResizeRendererToDisplaySize();
     if (needResize) {
       this.canvas.camera.aspect = this.canvas.domElement.clientWidth / this.canvas.domElement.clientHeight;
       this.canvas.camera.updateProjectionMatrix(); // doesn't distort view when resize
@@ -28,10 +28,10 @@ export class AnimationConfigurator {
     this.canvas.controls.update();
     this.canvas.renderer.render(this.canvas.scene, this.canvas.camera);
 
-    requestAnimationFrame(this._Animate.bind(this)); // starts animation loop
+    requestAnimationFrame(this.Animate.bind(this)); // starts animation loop
   }
 
-  _ResizeRendererToDisplaySize() {
+  ResizeRendererToDisplaySize() {
     const pixelRatio = window.devicePixelRatio;
     const canvasWidth = (this.canvas.domElement.clientWidth * pixelRatio) | 0;
     const canvasHeight = (this.canvas.domElement.clientHeight * pixelRatio) | 0;

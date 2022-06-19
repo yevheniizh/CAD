@@ -6,6 +6,8 @@ import { GeometryConfigurator } from "./geometryConfigurator.js";
 import { AnimationConfigurator } from "./animationConfigurator.js";
 import { CameraConfigurator } from "./cameraConfigurator.js";
 
+import { canvas } from "../../constants/DOM.js";
+
 /* ALTERNATIVE IMPORT */
 // import * as THREE from "https://cdn.skypack.dev/three@0.132.2";
 // import { OrbitControls } from "https://cdn.skypack.dev/three@0.132.2/examples/jsm/controls/OrbitControls.js";
@@ -28,27 +30,12 @@ window.config = {
  * */
 
 class Canvas {
-  domElement = document.querySelector(".canvas");
-
-  renderer;
-  controls;
-  
-  CameraConfigurator
-  camera;
-
-  SceneConfigurator;
-  scene;
-
-  AnimationConfigurator;
-
-  _entities = []; // all geometry will be located here
+  domElement = canvas;
+  entities = []; // all geometry will be located here
 
   constructor( config = window.config ) {
     this.config = config;
-    this._Initialize();
-  }
-  
-  _Initialize() {
+    
     // Renderer
     this._SetRenderer();
     
@@ -58,6 +45,7 @@ class Canvas {
     
     // Camera
     this.CameraConfigurator = new CameraConfigurator(this);
+    this.camera = this.CameraConfigurator.camera;
     
     // Controls 
     this._SetControls();

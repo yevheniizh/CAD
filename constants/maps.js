@@ -1,4 +1,4 @@
-import * as THREE from "./threejs/three.module.js";
+import * as THREE from "../containers/canvas/threejs/three.module.js";
 
 export const primitivesMap = {
   box: THREE.BoxGeometry,
