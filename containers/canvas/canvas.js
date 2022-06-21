@@ -25,7 +25,9 @@ window.config = {
  * 3) Add panels (geometry, light, animation?)
  * 4) Add objects factory
  * 5) Add special context menu? -> shortcuts
- * 6) Camera type (perspective, orthogonal)
+ * 6) Camera type (perspective, orthogonal)?
+ * 7) Login page?
+ * 8) Undo-redo buttons -> commands history stack -> commands tree -> 'Command' pattern?
  * 
  * */
 

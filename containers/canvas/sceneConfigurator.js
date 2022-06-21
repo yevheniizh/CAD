@@ -1,5 +1,6 @@
 import * as THREE from "./threejs/three.module.js";
 import { catchError } from '../../utils/error.util.js';
+import { colorPickerButton } from "../../constants/DOM.js";
 
 export class SceneConfigurator {
   scene;
@@ -29,7 +30,9 @@ export class SceneConfigurator {
     if ( !this.scene ) throw Error;
 
     if ( color ) window.config.background = color;
+    
     this.scene.background = new THREE.Color( color || this.canvas.config.background );
+    colorPickerButton.value = color || this.canvas.config.background;
   }
 
   setWireframe( value = !window.config.wireframe ) {

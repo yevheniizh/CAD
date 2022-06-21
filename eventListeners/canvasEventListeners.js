@@ -6,7 +6,8 @@ import {
   figureButton,
   wireframeButton,
 } from "../constants/DOM.js";
-import { materialsMap, primitivesMap } from "../constants/maps.js";
+import { materialsMap, primitivesMap } from "../constants/threeMaps.js";
+import { catchError } from "../utils/error.util.js";
 
 export class CanvasEventListeners {
   static initialize() {
@@ -18,14 +19,14 @@ export class CanvasEventListeners {
   }
 
   /* SCENE EVENTS */
-  static setBackground = (e) => {
-    Canvas.SceneConfigurator.setBackground(e.target.value)
-    colorPickerButton.value = window.config.background;
-  }
+  static setBackground = (e) => Canvas.SceneConfigurator.setBackground(e.target.value);
 
   static toggleAnimation = () => Canvas.AnimationConfigurator.toggleAnimation();
 
-  static setWireframe = () => Canvas.SceneConfigurator.setWireframe();
+  static setWireframe = () => {
+    const sceneConfigurator = Canvas.SceneConfigurator;
+    catchError(sceneConfigurator.setWireframe.bind(sceneConfigurator))();
+  };
 
   static removeAllFigures = () => Canvas.GeometryConfigurator.removeAll();
 
