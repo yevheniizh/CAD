@@ -31,7 +31,9 @@ body {
 
 .nav-area {
   position: absolute;
-  inset: 15px;
+  top: 15px;
+  left: 15px;
+  bottom: 60px;
   width: 200px;
   backdrop-filter: blur(15px);
   border-radius: 10px;

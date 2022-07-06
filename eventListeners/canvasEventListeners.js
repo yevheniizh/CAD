@@ -1,19 +1,11 @@
-import Canvas from "../containers/canvas/canvas.js";
+import Canvas from "../containers/canvas/Canvas.js";
 import {
   animationButton,
-  clearButton,
   colorPickerButton,
-  figureButton,
-  wireframeButton,
 } from "../constants/DOM.js";
-import { materialsMap, primitivesMap } from "../constants/threeMaps.js";
-import { catchError } from "../utils/error.util.js";
 
 export class CanvasEventListeners {
   static initialize() {
-    clearButton.addEventListener("click", this.removeAllFigures);
-    figureButton.addEventListener("click", this.addPrimitive);
-    wireframeButton.addEventListener("click", this.setWireframe);
     animationButton.addEventListener("click", this.toggleAnimation);
     colorPickerButton.addEventListener("change", this.setBackground);
   }
@@ -22,33 +14,4 @@ export class CanvasEventListeners {
   static setBackground = (e) => Canvas.SceneConfigurator.setBackground(e.target.value);
 
   static toggleAnimation = () => Canvas.AnimationConfigurator.toggleAnimation();
-
-  static setWireframe = () => {
-    const sceneConfigurator = Canvas.SceneConfigurator;
-    catchError(sceneConfigurator.setWireframe.bind(sceneConfigurator))();
-  };
-
-  static removeAllFigures = () => Canvas.GeometryConfigurator.removeAll();
-
-  static addPrimitive = () => Canvas.GeometryConfigurator.addPrimitive( {
-    geometry: {
-      type: primitivesMap.torus,
-      props: {
-        radius: 10,
-        tube: 3,
-        radialSegments: 50,
-        tubularSegments: 100,
-      }
-    },
-    material: {
-      type: materialsMap.standart,
-      props: {
-        color: 0xfcc742,
-        emissive: 0x111111,
-        metalness: 1,
-        roughness: 0.55,
-        wireframe: window.config.wireframe,
-      }
-    },
-  } )
 }

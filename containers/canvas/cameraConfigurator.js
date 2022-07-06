@@ -1,4 +1,4 @@
-import { camerasMap } from "../../constants/threeMaps.js";
+import { camerasMap, ECamerasMap } from "../../constants/threeMaps.js";
 
 export class CameraConfigurator {
   camera;
@@ -9,7 +9,7 @@ export class CameraConfigurator {
   }
 
   SetCamera() {
-    this.camera = new camerasMap.perspective(75, 2, 0.1, 1000.0);
+    this.camera = new camerasMap[ECamerasMap.perspective](75, 2, 0.1, 1000.0);
     this.camera.position.set(0, 0, 25);
   }
 }

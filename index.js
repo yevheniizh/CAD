@@ -1,2 +1,2 @@
-import './containers/canvas/canvas.js';
+import './containers/canvas/Canvas.js';
 import './eventListeners/index.js';

@@ -1,45 +1,41 @@
-import * as THREE from "./threejs/three.module.js";
-import { OrbitControls } from "./threejs/OrbitControls.js";
-
-import { SceneConfigurator } from "./sceneConfigurator.js";
-import { GeometryConfigurator } from "./geometryConfigurator.js";
-import { AnimationConfigurator } from "./animationConfigurator.js";
-import { CameraConfigurator } from "./cameraConfigurator.js";
-
-import { canvas } from "../../constants/DOM.js";
-
 /* ALTERNATIVE IMPORT */
 // import * as THREE from "https://cdn.skypack.dev/three@0.132.2";
 // import { OrbitControls } from "https://cdn.skypack.dev/three@0.132.2/examples/jsm/controls/OrbitControls.js";
 
-window.config = {
-  background: '#ffffff',
-  wireframe: false,
-};
+import * as THREE from "./threejs/three.module.js";
+import { OrbitControls } from "./threejs/OrbitControls.js";
+
+import { SceneConfigurator } from "./SceneConfigurator.js";
+import { ShapesConfigurator } from "./ShapesConfigurator.js";
+import { AnimationConfigurator } from "./AnimationConfigurator.js";
+import { CameraConfigurator } from "./CameraConfigurator.js";
+
+import { canvas } from "../../constants/DOM.js";
+import { CommandManager } from "../command/CommandManager.js";
+
+import { initConfig } from "./initConfig.js";
 
 /**
  * 
  * TODO: 
  * 1) Create config shape (camera, scene, etc)
- * 2) Add constants (colors, geometry, etc)
- * 3) Add panels (geometry, light, animation?)
+ * 2) Add constants (colors, shapes, etc)
+ * 3) Add panels (shapes, light, animation?)
  * 4) Add objects factory
  * 5) Add special context menu? -> shortcuts
  * 6) Camera type (perspective, orthogonal)?
  * 7) Login page?
- * 8) Undo-redo buttons -> commands history stack -> commands tree -> 'Command' pattern?
  * 
  * */
 
 class Canvas {
   domElement = canvas;
-  entities = []; // all geometry will be located here
 
-  constructor( config = window.config ) {
+  constructor( config = {...initConfig} ) {
     this.config = config;
     
     // Renderer
-    this._SetRenderer();
+    this.renderer = new THREE.WebGLRenderer({ canvas: this.domElement, antialias: true });
     
     // Scene
     this.SceneConfigurator = new SceneConfigurator(this);
@@ -50,22 +46,21 @@ class Canvas {
     this.camera = this.CameraConfigurator.camera;
     
     // Controls 
-    this._SetControls();
+    this.controls = new OrbitControls(this.camera, this.domElement);
     
-    // Geometry
-    this.GeometryConfigurator = new GeometryConfigurator(this);
+    // Shapes
+    this.ShapesConfigurator = new ShapesConfigurator(this);
+    this.config.shapes.forEach(shape => this.ShapesConfigurator.addShape(shape));
 
     // Animation
     this.AnimationConfigurator = new AnimationConfigurator(this);
-  }
 
-  _SetRenderer() {
-    this.renderer = new THREE.WebGLRenderer({ canvas: this.domElement, antialias: true });
-  }
-
-  _SetControls() {
-    this.controls = new OrbitControls(this.camera, this.domElement);
+    // Event listeners
+    new CommandManager(this);
   }
 }
 
-export default new Canvas();
+const App = new Canvas();
+window.App = App
+
+export default App;
