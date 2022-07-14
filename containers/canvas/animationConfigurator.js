@@ -1,3 +1,4 @@
+import Perlin from "./threejs/perlin.js";
 import { isShape } from "../../helpers/index.js";
 
 export class AnimationConfigurator {
@@ -18,9 +19,9 @@ export class AnimationConfigurator {
     (this.canvas.scene.children || [])
       .filter(isShape)
       .forEach((shape) => {
-        shape.rotation.x += this.animationConfig.x * Math.random() * 10;
-        shape.rotation.y += this.animationConfig.y * Math.random() * 15;
-        shape.rotation.z += this.animationConfig.z * Math.random();
+        shape.rotation.x += this.animationConfig.x * Perlin(Math.PI, 0, 0) || 0;
+        shape.rotation.y += this.animationConfig.y * Perlin(Math.PI, 0, 0) || 0;
+        shape.rotation.z += this.animationConfig.z * Perlin(Math.PI, 0, 0) || 0;
       });
 
     const needResize = this.ResizeRendererToDisplaySize();
@@ -60,7 +61,7 @@ export class AnimationConfigurator {
   }
 
   startAnimation() {
-    this.animationConfig = { x: 0.01, y: 0.005, z: 0.01 }
+    this.animationConfig = { x: 0.1, y: 0.05, z: 0.1 }
   }
 
   stopAnimation() {
