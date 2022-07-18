@@ -10,6 +10,7 @@ export const clearButton = document.querySelector(".view-clear");
 export const animationButton = document.querySelector(".view-animation");
 export const undoButton = document.querySelector(".view-undo");
 export const redoButton = document.querySelector(".view-redo");
+export const googleButton = document.querySelector(".google");
 
 /* Independent components */
 export const notification = document.querySelector(".notification");
