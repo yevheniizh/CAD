@@ -28,7 +28,7 @@ import { initConfig } from "./initConfig.js";
  * 
  * */
 
-class Canvas {
+export default class Canvas {
   domElement = canvas;
 
   constructor( config = {...initConfig} ) {
@@ -59,8 +59,3 @@ class Canvas {
     new CommandManager(this);
   }
 }
-
-const App = new Canvas();
-window.App = App
-
-export default App;

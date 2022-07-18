@@ -1,4 +1,5 @@
 /* General */
+export const pageContent = document.querySelector('.content');
 export const app = document.querySelector('.app');
 export const canvas = document.querySelector('.canvas');
 
