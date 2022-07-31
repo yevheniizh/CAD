@@ -1,9 +1,15 @@
-import { history } from "../../constants/DOM.js";
+import { ECanvasSubElements } from "../../pages/canvas/enums.js";
 
 export class CommandHistory {
   history = [];
   commandsLimit = 3;
   currentCommandIndex = null; // null, 0, ... [commandsLimit]; null - is an initial state
+
+  constructor(canvas) {
+    this.canvas = canvas;
+    console.log(canvas.context);
+    this.historyPanel = canvas.context.subElements[ECanvasSubElements.historyPanel];
+  }
 
   push(command) {
     if (this.currentCommandIndex === null) {
@@ -65,9 +71,10 @@ export class CommandHistory {
 
   addToHistoryPanel(commandName) {
     // 1. Crop the history tail nodes, If there are 
-    if (Array.from(history.childNodes).length > this.history.length
-      || this.currentCommandIndex === 1 && Array.from(history.childNodes).length >= this.history.length) {
-      Array.from(history.childNodes) // get static collection of nodes
+    console.log('this.historyPanel', this.historyPanel)
+    if (Array.from(this.historyPanel.childNodes).length > this.history.length
+      || this.currentCommandIndex === 1 && Array.from(this.historyPanel.childNodes).length >= this.history.length) {
+      Array.from(this.historyPanel.childNodes) // get static collection of nodes
         .forEach( (child, index) => {
           if (index >= this.currentCommandIndex) {
             child.remove();
@@ -78,11 +85,12 @@ export class CommandHistory {
     // 2. Append new command to the history panel
     const element = document.createElement('div');
     element.innerHTML = `<div class="command">${commandName}</div>`;
-    history.appendChild(element.firstElementChild);
+    this.historyPanel.appendChild(element.firstElementChild);
 
     // 3. Crop the history head node, If there are more commands than 'commandsLimit'
-    if ( Array.from(history.childNodes).length > this.commandsLimit ) {
-      history.childNodes[0].remove(); // history.removeChild(history.firstChild);
+    console.log('this.historyPanel', this.historyPanel)
+    if ( Array.from(this.historyPanel.childNodes).length > this.commandsLimit ) {
+      this.historyPanel.childNodes[0].remove(); // history.removeChild(history.firstChild);
     }
 
     // 4. Render the history panel
@@ -90,7 +98,7 @@ export class CommandHistory {
   }
 
   renderHistoryPanel() {
-    history.childNodes.forEach( (child, index) => {
+    this.historyPanel.childNodes.forEach( (child, index) => {
       if (this.currentCommandIndex === null) {
         child.classList.add('inactive')
         child.classList.remove('command_current');

@@ -1,7 +1,18 @@
-// import { AppEventListeners } from "./appEventListeners.js";
-// import { MouseEventListeners } from "./mouseEventListeners.js";
-// import { CanvasEventListeners } from "./canvasEventListeners.js";
+/**
+ * @name toggleAccordion
+ * @type {function} - event listener
+ */
+export function toggleAccordion( event ) {
+  const accordionButton = event.target.closest(".accordion-button");
 
-// AppEventListeners.initialize();
-// MouseEventListeners.initialize();
-// CanvasEventListeners.initialize();
+  if (accordionButton) {
+    accordionButton.classList.toggle("active");
+    const accordionBody = accordionButton.nextElementSibling; // .accordion-body
+
+    if (accordionBody.style.maxHeight) {
+      accordionBody.style.maxHeight = null;
+    } else {
+      accordionBody.style.maxHeight = accordionBody.scrollHeight + "px";
+    } 
+  }
+}

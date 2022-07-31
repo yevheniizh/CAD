@@ -10,10 +10,10 @@ import { ShapesConfigurator } from "./ShapesConfigurator.js";
 import { AnimationConfigurator } from "./AnimationConfigurator.js";
 import { CameraConfigurator } from "./CameraConfigurator.js";
 
-import { canvas } from "../../constants/DOM.js";
 import { CommandManager } from "../command/CommandManager.js";
 
 import { initConfig } from "./initConfig.js";
+import { ECanvasSubElements } from "../../pages/canvas/enums.js";
 
 /**
  * 
@@ -29,11 +29,11 @@ import { initConfig } from "./initConfig.js";
  * */
 
 export default class Canvas {
-  domElement = canvas;
-
-  constructor( config = {...initConfig} ) {
+  constructor( { config = {...initConfig}, context } = {} ) {
     this.config = config;
-    
+    this.context = context;
+    this.domElement = context.subElements[ECanvasSubElements.canvas];
+
     // Renderer
     this.renderer = new THREE.WebGLRenderer({ canvas: this.domElement, antialias: true });
     
@@ -55,7 +55,7 @@ export default class Canvas {
     // Animation
     this.AnimationConfigurator = new AnimationConfigurator(this);
 
-    // Event listeners
+    // Command listeners
     new CommandManager(this);
   }
 }

@@ -1,21 +1,21 @@
-import { clearButton, figureButton, notification, undoButton, redoButton, wireframeButton } from "../../constants/DOM.js";
 import { AddCommand, RedoCommand, UndoCommand } from "./Command.js";
 import { CommandHistory } from "./CommandHistory.js";
 import { setUuid } from "../../helpers/index.js";
 import { initConfig } from "../canvas/initConfig.js";
+import { ECanvasSubElements } from "../../pages/canvas/enums.js";
 
 /**
  * CommandManager needs to handle the order of user operations with objects on the canvas.
  * And it defines event listeners on commands.
  */
 export class CommandManager {
-  // TODO: transform a history storage from an array to a stack:
-  // {...previous states, current state, ...next states}
-  history = new CommandHistory(); // Snapshots[]
-
+  
   constructor( canvas ) {
     this.canvas = canvas;
     this.addEventListeners();
+    // TODO: transform a history storage from an array to a stack:
+    // {...previous states, current state, ...next states}
+    this.history = new CommandHistory(canvas); // Snapshots[]
   }
 
   toggleWireframe = () => this.executeCommand(
@@ -67,11 +67,11 @@ export class CommandManager {
   }
 
   addEventListeners() {
-    figureButton.addEventListener('click', this.addShape);
-    wireframeButton.addEventListener('click', this.toggleWireframe);
-    undoButton.addEventListener('click', this.undoListener);
-    redoButton.addEventListener('click', this.redoListener);
-    clearButton.addEventListener("click", this.removeAllFigures);
+    this.canvas.context.subElements[ECanvasSubElements.figureButton].addEventListener('click', this.addShape);
+    this.canvas.context.subElements[ECanvasSubElements.wireframeButton].addEventListener('click', this.toggleWireframe);
+    this.canvas.context.subElements[ECanvasSubElements.undoButton].addEventListener('click', this.undoListener);
+    this.canvas.context.subElements[ECanvasSubElements.redoButton].addEventListener('click', this.redoListener);
+    this.canvas.context.subElements[ECanvasSubElements.clearButton].addEventListener("click", this.removeAllFigures);
 
     document.addEventListener('keydown', (e) => {
       if ( ( e.ctrlKey || e.metaKey ) && e.key === 'z') {
@@ -94,9 +94,9 @@ export class CommandManager {
       command.undo();
     } else {
       // TODO: create a reusable notification component
-      notification.innerHTML = 'Nothing to undo';
-      notification.classList.add('visible');
-      setTimeout(() => notification.classList.remove('visible'), 1000);
+      this.canvas.context.subElements[ECanvasSubElements.notification].innerHTML = 'Nothing to undo';
+      this.canvas.context.subElements[ECanvasSubElements.notification].classList.add('visible');
+      setTimeout(() => this.canvas.context.subElements[ECanvasSubElements.notification].classList.remove('visible'), 1000);
     }
   }
 
@@ -107,9 +107,9 @@ export class CommandManager {
       command.redo();
     } else {
       // TODO: create a reusable notification component
-      notification.innerHTML = 'Nothing to redo';
-      notification.classList.add('visible');
-      setTimeout(() => notification.classList.remove('visible'), 1000);
+      this.canvas.context.subElements[ECanvasSubElements.notification].innerHTML = 'Nothing to redo';
+      this.canvas.context.subElements[ECanvasSubElements.notification].classList.add('visible');
+      setTimeout(() => this.canvas.context.subElements[ECanvasSubElements.notification].classList.remove('visible'), 1000);
     }
   }
 }

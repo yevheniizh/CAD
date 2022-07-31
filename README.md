@@ -3,7 +3,7 @@
 
 export default Page {
   element; // HTML-page entity
-  subElements = {}; // Component wrappers from the 'element', HTML-nodes
+  subElements = {}; // Component wrappers from the 'element', HTML-nodes. The main benefit of this is the reaching sub-elemens out on the js-level (not DOM)
   components = {}; // Initiated HTML-components and easy access to them
 
   initComponents () {

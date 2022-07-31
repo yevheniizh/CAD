@@ -1,8 +1,8 @@
 import * as THREE from "./threejs/three.module.js";
 
 import { catchError } from '../../utils/error.util.js';
-import { colorPickerButton } from "../../constants/DOM.js";
 import { isAlreadyOnScene } from "../../helpers/index.js";
+import { ECanvasSubElements } from "../../pages/canvas/enums.js";
 
 export class SceneConfigurator {
   scene;
@@ -65,8 +65,8 @@ export class SceneConfigurator {
 
   setBackground( color = this.canvas.config.background ) {
     if ( !this.scene ) throw Error;
-    
+
     this.scene.background = new THREE.Color( color );
-    colorPickerButton.value = color;
+    this.canvas.context.subElements[ECanvasSubElements.colorPickerButton].value = color;
   }
 }

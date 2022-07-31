@@ -1,13 +1,17 @@
 import Router from "./router/index.js";
 
-import CanvasPage from "./pages/canvas.js";
+import CanvasPage from "./pages/canvas/index.js";
 import AuthPage from "./pages/auth.js";
 import ErrorPage from "./pages/error404.js";
+
+import { toggleAccordion } from "./eventListeners/index.js";
 
 class MainPage {
   constructor () {
     this.router = Router.instance();
     this.render();
+
+    this.addEventListeners();
   }
 
   get template () {
@@ -36,6 +40,10 @@ class MainPage {
       .addRoute('/404', new ErrorPage())
       .setNotFoundPagePath('/404')
       .listen();
+  }
+
+  addEventListeners() {
+    document.addEventListener("click", toggleAccordion);
   }
 }
 
