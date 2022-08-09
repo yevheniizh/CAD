@@ -20,9 +20,9 @@ export default class CanvasPage {
         
         <!-- Tools panel -->
         <nav class="nav-area">
-          <div class="nav-view-category">
-            <button class="button accordion-button nav-area-button">View</button>
-            <ul class="accordion-body nav-area-body">
+          <div class="nav-subarea accordion">
+            <button class="button a-button nav-button">View</button>
+            <ul class="a-panel nav-panel">
               <li class="nav-item">
                 <button class='button'>Show axes</button>
               </li>
@@ -32,9 +32,9 @@ export default class CanvasPage {
                   data-element=${ECanvasSubElements.clearButton}
                 >Clear scene</button>
               </li>
-              <li>
-                <button class='button accordion-button'>Background</button>
-                <div class='colorpicker accordion-body'>
+              <li class='accordion'>
+                <button class='button a-button'>Background</button>
+                <div class='colorpicker a-panel'>
                   <input class='color-input' type='color' data-element=${ECanvasSubElements.colorPickerButton} />
                 </div>
               </li>

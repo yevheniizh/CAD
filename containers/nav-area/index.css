@@ -1,7 +1,25 @@
 .nav-area {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  bottom: 60px;
+  width: 200px;
+  backdrop-filter: blur(15px);
+  border-radius: 10px;
+  border: 1px solid var(--gray-2);
+  overflow: scroll;
 }
 
-.nav-area-button {
+.nav-area::after {
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  content: '';
+  background-color: var(--gray-2);
+  opacity: 0.2;
+  z-index: -1;
+}
+
+.nav-button {
   background-color: var( --gray-1 );
   color: var( --gray-4 );
   padding: 18px;
@@ -11,11 +29,7 @@
   font-size: 15px;
 }
 
-.nav-area-button.active, .nav-area-button:hover {
-  background-color: var( --gray-2 );
-}
-
-.nav-area-button:after {
+.nav-button:after {
   content: "\002B"; /* "+" */
   color: var( --gray-3 );
   font-weight: bold;
@@ -23,16 +37,21 @@
   margin-left: 5px;
 }
 
-.nav-area-button.active:after {
+.nav-subarea.accordion.active .nav-button:after {
   content: "\2212"; /* "-" */
 }
 
-.nav-area-button.active + .nav-area-body {
-  background-color: var( --gray-1 );
-  padding: 8px 18px;
+.nav-subarea.accordion.active .nav-button,
+.nav-subarea.accordion.active .nav-button:hover {
+  background-color: var( --gray-2 );
 }
 
-.nav-area-body {
+.nav-panel {
   padding: 0 18px;
+  background-color: var( --gray-1 );
   margin: 0;
+}
+
+.nav-subarea.accordion.active .nav-panel {
+  padding: 8px 18px;
 }

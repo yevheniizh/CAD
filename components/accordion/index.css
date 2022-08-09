@@ -1,10 +1,21 @@
-.accordion-button {
+.accordion {
+  display: flex;
+  flex-direction: column;
   width: 100%;
+  height: auto;
+}
+
+.accordion > .a-button {
   cursor: pointer;
 }
 
-.accordion-body {
+.accordion > .a-panel {
+  transition: all 0.25s ease-in-out;
+  height: auto;
   max-height: 0;
-  transition: max-height 0.1s ease-in-out;
-  overflow: scroll;
+  overflow: hidden;
+}
+
+.accordion.active > .a-panel {
+  max-height: 1000px; /* some great numeric value */
 }

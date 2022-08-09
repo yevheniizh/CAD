@@ -12,7 +12,7 @@ body {
 
 .app {
   position: relative;
-  inset: 0;
+  top: 0; right: 0; bottom: 0; left: 0;
   display: flex;
   width: 100%;
   height: 100%;
@@ -21,31 +21,10 @@ body {
 
 .canvas {
   position: absolute;
-  inset: 0;
+  top: 0; right: 0; bottom: 0; left: 0;
   display: block;
   width: 100%;
   height: 100%;
   -webkit-mask-image: radial-gradient(black 70%, rgba(0, 0, 0, 0.5) 100%);
   mask-image: radial-gradient(black 70%, rgba(0, 0, 0, 0.5) 100%);
-}
-
-.nav-area {
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  bottom: 60px;
-  width: 200px;
-  backdrop-filter: blur(15px);
-  border-radius: 10px;
-  border: 1px solid var(--gray-2);
-  overflow: scroll;
-}
-
-.nav-area::after {
-  position: absolute;
-  inset: 0;
-  content: '';
-  background-color: var(--gray-2);
-  opacity: 0.2;
-  z-index: -1;
 }
