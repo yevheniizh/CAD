@@ -7,7 +7,6 @@ export class CommandHistory {
 
   constructor(canvas) {
     this.canvas = canvas;
-    console.log(canvas.context);
     this.historyPanel = canvas.context.subElements[ECanvasSubElements.historyPanel];
   }
 
@@ -71,7 +70,6 @@ export class CommandHistory {
 
   addToHistoryPanel(commandName) {
     // 1. Crop the history tail nodes, If there are 
-    console.log('this.historyPanel', this.historyPanel)
     if (Array.from(this.historyPanel.childNodes).length > this.history.length
       || this.currentCommandIndex === 1 && Array.from(this.historyPanel.childNodes).length >= this.history.length) {
       Array.from(this.historyPanel.childNodes) // get static collection of nodes
@@ -88,7 +86,6 @@ export class CommandHistory {
     this.historyPanel.appendChild(element.firstElementChild);
 
     // 3. Crop the history head node, If there are more commands than 'commandsLimit'
-    console.log('this.historyPanel', this.historyPanel)
     if ( Array.from(this.historyPanel.childNodes).length > this.commandsLimit ) {
       this.historyPanel.childNodes[0].remove(); // history.removeChild(history.firstChild);
     }

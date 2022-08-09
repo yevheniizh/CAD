@@ -6,16 +6,49 @@
   z-index: 100;
 
   /* styling */
-  border: 1.5px solid var( --gray-3 );
+  --current-color: var( --info-color );
+  border: 1.5px solid rgb( var( --current-color ) );
+  background-color: rgba( var( --current-color ), 0.25 );
   min-width: 200px;
   height: 50px;
   line-height: 50px;
   border-radius: 10px;
   text-align: center;
   opacity: 0;
-  transition: opacity 0.25s ease;
+  animation: fadeOut 0.2s linear;
 }
 
 .notification.visible {
   opacity: 1;
+  animation: fadeIn 0.2s linear;
+}
+
+.notification--success {
+  --current-color: var( --success-color );
+}
+
+.notification--error {
+  --current-color: var( --error-color );
+}
+
+.notification--warning {
+  --current-color: var( --warning-color );
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

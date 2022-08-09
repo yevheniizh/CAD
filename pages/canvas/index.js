@@ -15,8 +15,6 @@ export default class CanvasPage {
     return (
       `<div class="canvas">
         <canvas class="canvas" data-element=${ECanvasSubElements.canvas}></canvas>
-
-        <div class="notification" data-element=${ECanvasSubElements.notification}></div>
         
         <!-- Tools panel -->
         <nav class="nav-area">

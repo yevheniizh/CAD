@@ -1,3 +1,5 @@
+/* MOUSE EVENTS */
+
 export function orbitOrPanCursor( event ) {
   switch (event.button) {
     case 0:
@@ -19,6 +21,7 @@ export function defaultCursor() {
 }
 
 /* SCENE EVENTS */
+
 export function setBackground(event) {
   this.canvas.SceneConfigurator.setBackground(event.target.value);
 }

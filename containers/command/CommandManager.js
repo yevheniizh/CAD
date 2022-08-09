@@ -3,6 +3,7 @@ import { CommandHistory } from "./CommandHistory.js";
 import { setUuid } from "../../helpers/index.js";
 import { initConfig } from "../canvas/initConfig.js";
 import { ECanvasSubElements } from "../../pages/canvas/enums.js";
+import { Notification } from "../../components/notification/notifications.js";
 
 /**
  * CommandManager needs to handle the order of user operations with objects on the canvas.
@@ -93,11 +94,13 @@ export class CommandManager {
     if (!!command) {
       command.undo();
     } else {
-      // TODO: create a reusable notification component
-      this.canvas.context.subElements[ECanvasSubElements.notification].innerHTML = 'Nothing to undo';
-      this.canvas.context.subElements[ECanvasSubElements.notification].classList.add('visible');
-      setTimeout(() => this.canvas.context.subElements[ECanvasSubElements.notification].classList.remove('visible'), 1000);
+      this.showNotification( 'Nothing to undo' );
     }
+  }
+
+  showNotification(text, { duration = 1500, type } = {}) {
+    const notification = new Notification( text, { duration, type } );
+    notification.show();
   }
 
   redo() {
@@ -106,10 +109,7 @@ export class CommandManager {
     if (!!command) {
       command.redo();
     } else {
-      // TODO: create a reusable notification component
-      this.canvas.context.subElements[ECanvasSubElements.notification].innerHTML = 'Nothing to redo';
-      this.canvas.context.subElements[ECanvasSubElements.notification].classList.add('visible');
-      setTimeout(() => this.canvas.context.subElements[ECanvasSubElements.notification].classList.remove('visible'), 1000);
+      this.showNotification( 'Nothing to redo' );
     }
   }
 }

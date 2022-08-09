@@ -1,9 +1,14 @@
 /* Colors */
 :root {
-  --black: #292929;
-  --gray-1: #eee;
-  --gray-2: #ccc;
-  --gray-3: #777;
-  --gray-4: #444;
-  --gray-5: #aaa;
+  --black: rgb(41, 41, 41);
+  --gray-1: rgb(238, 238, 238);
+  --gray-2: rgb(204, 204, 204);
+  --gray-3: rgb(119, 119, 119);
+  --gray-4: rgb(68, 68, 68);
+  --gray-5: rgb(170, 170, 170);
+
+  --info-color: 119, 119, 119;
+  --success-color: 68, 204, 17;
+  --error-color: 238, 68, 68;
+  --warning-color: 255, 165, 0;
 }
