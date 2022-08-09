@@ -1,4 +1,4 @@
-import { EGeometriesMap, EMaterialsMap } from "../../constants/threeMaps.js";
+import { EGeometriesMap, EMaterialsMap } from "./enums.js";
 
 export const initConfig = {
   background: "#ffffff",

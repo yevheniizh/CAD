@@ -1,8 +1,8 @@
 import * as THREE from "./threejs/three.module.js";
 
 import { catchError } from '../../utils/error.util.js';
-import { isAlreadyOnScene } from "../../helpers/index.js";
-import { ECanvasSubElements } from "../../pages/canvas/enums.js";
+import { isAlreadyOnScene } from "./helpers.js";
+import { ECanvasSubElements } from "./enums.js";
 
 export class SceneConfigurator {
   scene;

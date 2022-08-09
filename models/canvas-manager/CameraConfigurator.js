@@ -1,4 +1,4 @@
-import { camerasMap, ECamerasMap } from "../../constants/threeMaps.js";
+import { camerasMap, ECamerasMap } from "./enums.js";
 
 export class CameraConfigurator {
   camera;

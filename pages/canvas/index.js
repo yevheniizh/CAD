@@ -1,13 +1,18 @@
 import { defaultCursor, orbitOrPanCursor, setBackground, toggleAnimation, zoom } from "./eventListeners.js";
-import Canvas from "../../containers/canvas/Canvas.js";
-import { ECanvasSubElements } from "./enums.js";
+
+import { ECanvasSubElements } from "../../models/canvas-manager/enums.js";
 import { formGoogleSignIn } from "../../auth/firebase-auth.js";
 
+import CanvasManager from "../../models/canvas-manager/index.js";
+import CommandManager from "../../models/command-manager/index.js";
 
 export default class CanvasPage {
   element;
   subElements = {};
   components = {};
+
+  canvasManager = null;
+  commandManager = null;
 
   async initComponents () {}
 
@@ -104,7 +109,8 @@ export default class CanvasPage {
 
     this.initEventListeners();
 
-    this.canvas = new Canvas({context: this});
+    this.canvasManager = new CanvasManager({context: this});
+    this.commandManager = new CommandManager(this.canvasManager);
 
     return this.element;
   }

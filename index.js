@@ -4,9 +4,12 @@ import CanvasPage from "./pages/canvas/index.js";
 import AuthPage from "./pages/auth.js";
 import ErrorPage from "./pages/error404.js";
 
-import { toggleAccordion } from "./eventListeners/index.js";
+class RootPage {
+  onToggleAccordion( event ) {
+    const accordionButton = event.target.closest(".a-button");
+    accordionButton?.parentNode.classList.toggle("active");
+  }
 
-class MainPage {
   constructor () {
     this.router = Router.instance();
     this.render();
@@ -43,10 +46,10 @@ class MainPage {
   }
 
   addEventListeners() {
-    document.addEventListener("click", toggleAccordion);
+    document.addEventListener("click", this.onToggleAccordion);
   }
 }
 
-const mainPage = new MainPage();
+const rootPage = new RootPage();
 
-mainPage.initializeRouter();
+rootPage.initializeRouter();

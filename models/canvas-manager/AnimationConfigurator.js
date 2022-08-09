@@ -1,5 +1,5 @@
 import Perlin from "./threejs/perlin.js";
-import { isShape } from "../../helpers/index.js";
+import { isShape } from "./helpers.js";
 
 export class AnimationConfigurator {
   constructor( canvas ) {

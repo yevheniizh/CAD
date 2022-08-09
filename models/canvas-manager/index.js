@@ -10,25 +10,10 @@ import { ShapesConfigurator } from "./ShapesConfigurator.js";
 import { AnimationConfigurator } from "./AnimationConfigurator.js";
 import { CameraConfigurator } from "./CameraConfigurator.js";
 
-import { CommandManager } from "../command/CommandManager.js";
-
 import { initConfig } from "./initConfig.js";
-import { ECanvasSubElements } from "../../pages/canvas/enums.js";
+import { ECanvasSubElements } from "./enums.js";
 
-/**
- * 
- * TODO: 
- * 1) Create config shape (camera, scene, etc)
- * 2) Add constants (colors, shapes, etc)
- * 3) Add panels (shapes, light, animation?)
- * 4) Add objects factory
- * 5) Add special context menu? -> shortcuts
- * 6) Camera type (perspective, orthogonal)?
- * 7) Login page?
- * 
- * */
-
-export default class Canvas {
+export default class CanvasManager {
   constructor( { config = {...initConfig}, context } = {} ) {
     this.config = config;
     this.context = context;
@@ -54,8 +39,5 @@ export default class Canvas {
 
     // Animation
     this.AnimationConfigurator = new AnimationConfigurator(this);
-
-    // Command listeners
-    new CommandManager(this);
   }
 }

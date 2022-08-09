@@ -1,15 +1,15 @@
 import { AddCommand, RedoCommand, UndoCommand } from "./Command.js";
 import { CommandHistory } from "./CommandHistory.js";
-import { setUuid } from "../../helpers/index.js";
-import { initConfig } from "../canvas/initConfig.js";
-import { ECanvasSubElements } from "../../pages/canvas/enums.js";
-import { Notification } from "../../components/notification/notifications.js";
+import { setUuid } from "../canvas-manager/helpers.js";
+import { initConfig } from "../canvas-manager/initConfig.js";
+import { ECanvasSubElements } from "../canvas-manager/enums.js";
+import { Notification } from "../../components/notification/index.js";
 
 /**
  * CommandManager needs to handle the order of user operations with objects on the canvas.
  * And it defines event listeners on commands.
  */
-export class CommandManager {
+export default class CommandManager {
   
   constructor( canvas ) {
     this.canvas = canvas;

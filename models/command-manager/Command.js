@@ -1,7 +1,6 @@
-import { setUuid } from "../../helpers/index.js";
+import { setUuid } from "../canvas-manager/helpers.js";
 
-export class Command {
-  commandManager;
+class Command {
   backup; // app config object
   instructions; // obj with two methods -- undo/redo
 

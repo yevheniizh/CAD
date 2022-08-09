@@ -1,6 +1,6 @@
 import * as THREE from "./threejs/three.module.js";
-import { geometriesMap, materialsMap } from "../../constants/threeMaps.js";
-import { isAlreadyOnConfig, isAlreadyOnScene, isShape } from "../../helpers/index.js";
+import { geometriesMap, materialsMap } from "./enums.js";
+import { isAlreadyOnConfig, isAlreadyOnScene, isShape } from "./helpers.js";
 
 export class ShapesConfigurator {
   constructor(canvas){

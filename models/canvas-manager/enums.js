@@ -1,4 +1,4 @@
-import * as THREE from "../containers/canvas/threejs/three.module.js";
+import * as THREE from "./threejs/three.module.js";
 
 export const EGeometriesMap = {
   box: 'box',
@@ -34,4 +34,17 @@ export const ECamerasMap = {
 export const camerasMap = {
   [ECamerasMap.perspective]: THREE.PerspectiveCamera,
   [ECamerasMap.orthographic]: THREE.OrthographicCamera,
+}
+
+export const ECanvasSubElements = {
+  animationButton: 'animationButton',
+  canvas: 'canvas',
+  clearButton: 'clearButton',
+  colorPickerButton: 'colorPickerButton',
+  figureButton: 'figureButton',
+  googleButton: 'googleButton',
+  historyPanel: 'historyPanel',
+  redoButton: 'redoButton',
+  undoButton: 'undoButton',
+  wireframeButton: 'wireframeButton',
 }

@@ -23,9 +23,9 @@ export function defaultCursor() {
 /* SCENE EVENTS */
 
 export function setBackground(event) {
-  this.canvas.SceneConfigurator.setBackground(event.target.value);
+  this.canvasManager.SceneConfigurator.setBackground(event.target.value);
 }
 
 export function toggleAnimation() {
-  this.canvas.AnimationConfigurator.toggleAnimation();
+  this.canvasManager.AnimationConfigurator.toggleAnimation();
 }

@@ -1,4 +1,4 @@
-import { ECanvasSubElements } from "../../pages/canvas/enums.js";
+import { ECanvasSubElements } from "../canvas-manager/enums.js";
 
 export class CommandHistory {
   history = [];
