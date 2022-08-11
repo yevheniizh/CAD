@@ -4,6 +4,7 @@
 
 /* Components */
 @import '../components/accordion/index.css';
+@import '../components/button/index.css';
 @import '../components/notification/index.css';
 
 /* Containers */

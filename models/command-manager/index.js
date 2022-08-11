@@ -10,7 +10,6 @@ import { Notification } from "../../components/notification/index.js";
  * And it defines event listeners on commands.
  */
 export default class CommandManager {
-  
   constructor( canvas ) {
     this.canvas = canvas;
     this.addEventListeners();
