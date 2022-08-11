@@ -1,0 +1,28 @@
+label {
+  display: block;
+  height: 20px;
+  margin-bottom: 8px;
+}
+
+.input {
+  display: block;
+  min-width: 100%;
+  min-height: 56px;
+  padding: 16px;
+  font-size: 20px;
+  border: 1px solid var( --gray-tint-3 );
+  border-radius: 2px;
+  word-wrap: break-word;
+  font-weight: 300;
+}
+
+.input:required:valid + div,
+.input:focus:valid + div {
+  visibility: hidden;
+}
+
+.input:required:invalid + div,
+.input:focus:invalid + div {
+  visibility: visible;
+  color: var( --red );
+}
