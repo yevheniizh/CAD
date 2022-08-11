@@ -1,7 +1,7 @@
 import Router from "./router/index.js";
 
 import CanvasPage from "./pages/canvas/index.js";
-import AuthPage from "./pages/auth.js";
+import AuthPage from "./pages/auth/index.js";
 import ErrorPage from "./pages/error404.js";
 
 class RootPage {
