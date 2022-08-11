@@ -19,9 +19,8 @@
   --gray-tint-5: rgb(241, 241, 241);
   --white: rgb(255, 255, 255);
   --red: rgb(229, 103, 103);
-  --gradient: linear-gradient(135deg, #39B0D6 0%, #3978D6 100%);
 
-  /* Notification */
+  /* Notifications */
   --info-color: 119, 119, 119;
   --success-color: 68, 204, 17;
   --error-color: 238, 68, 68;

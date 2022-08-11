@@ -1,0 +1,15 @@
+.auth-form {
+  margin: auto;
+  width: 526px;
+}
+
+.auth-form__header {
+  position: relative;
+  height: 48px;
+}
+
+.auth-form__title {
+  margin: 0;
+  font-size: 40px;
+  font-weight: 800;
+}

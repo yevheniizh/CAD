@@ -1,68 +1,37 @@
+import AuthForm, { EContainerName } from "../../containers/auth-form/index.js";
+
 export default class AuthPage {
   element;
   subElements = {};
   components = {};
 
-  async initComponents () {}
+  initComponents () {
+    const authForm = new AuthForm();
 
-  get template () {
-    return `<div class="auth">
-      <div class="content__top-panel">
-        <h2 class="page-title">Log in</h2>
-      </div>
-      <div data-element="authForm">
-        <!-- auth-form component -->
-
-        <button class="button button_large button_secondary fullwidth">
-          <img src="../../assets/icons/google.svg" alt="Google icon">
-          <span>Log in with Google</span>
-        </button>
-
-        <form>
-          <label for="email">Email</label>
-          <input
-            class="input"
-            id="email"
-            type="email"
-            placeholder="Enter your email"
-            required
-          ></input>
-          <div>
-            <img src="../../assets/icons/error.svg" alt="Error icon">
-            <span class="hint">User is not found</span>
-          </div>
-          <label for="password">Password</label>
-          <input
-            class="input"
-            id="password"
-            type="password"
-            placeholder="Enter your password"
-            required
-            minlength="6"
-            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$"
-          ></input>
-          <div>
-            <img src="../../assets/icons/error.svg" alt="Error icon">
-            <span class="hint">Wrong password</span>
-          </div>
-          <button type="submit" class="button button_large button_primary">Log in</button>
-        </form>
-      </div>
-    </div>`;
+    this.components[EContainerName.authForm] = authForm;
   }
 
-  initEventListeners() {}
+  get template () {
+    return (
+      `<div class="auth">
+        <div class="content__top-panel">
+          <img src="../../assets/icons/WebCAD-logo.svg" alt="App logo">
+        </div>
+        <div data-element="${EContainerName.authForm}">
+          <!-- auth-form component -->
+        </div>
+      </div>`
+    );
+  }
 
-  removeEventListeners() {}
-
-  async render () {
+  render () {
     const element = document.createElement('div');
     element.innerHTML = this.template;
     this.element = element.firstElementChild;
 
     this.subElements = this.getSubElements(this.element);
 
-    await this.initComponents();
+    this.initComponents();
 
     this.renderComponents();
 
@@ -91,6 +60,10 @@ export default class AuthPage {
       return accum;
     }, {});
   }
+
+  initEventListeners() {}
+
+  removeEventListeners() {}
 
   destroy () {
     for (const component of Object.values(this.components)) {

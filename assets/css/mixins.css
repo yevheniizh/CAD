@@ -1,0 +1,23 @@
+.fullwidth {
+  width: 100%;
+  min-width: 100%;
+}
+
+.pos-centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate( -50%, -50% );
+}
+
+.pos-centered--hor {
+  position: absolute;
+  left: 50%;
+  transform: translate( -50%, 0 );
+}
+
+.pos-centered--ver {
+  position: absolute;
+  top: 50%;
+  transform: translate( 0, -50% );
+}

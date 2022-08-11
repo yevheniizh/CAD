@@ -1,6 +1,7 @@
 @import './normalize.css';
 @import './variables.css';
 @import './main.css';
+@import './mixins.css';
 
 /* Components */
 @import '../../components/accordion/index.css';
@@ -9,5 +10,6 @@
 @import '../../components/notification/index.css';
 
 /* Containers */
+@import '../../containers/auth-form/index.css';
 @import '../../containers/nav-area/index.css';
 @import '../../containers/history-panel/index.css';
