@@ -6,19 +6,19 @@ export default class AuthPage {
   components = {};
 
   initComponents () {
-    const authForm = new AuthForm();
+    const form = new AuthForm();
 
-    this.components[EContainerName.authForm] = authForm;
+    this.components[EContainerName.form] = form;
   }
 
   get template () {
     return (
-      `<div class="auth">
-        <div class="content__top-panel">
-          <img src="../../assets/icons/WebCAD-logo.svg" alt="App logo">
+      `<div class="auth-page page">
+        <div class="auth-page__logo" data-element="${EContainerName.logo}">
+          <img class="logo__img" src="../../assets/icons/logo.svg" alt="App logo">
         </div>
-        <div data-element="${EContainerName.authForm}">
-          <!-- auth-form component -->
+        <div class="auth-page__form" data-element="${EContainerName.form}">
+          <!-- Auth-form component -->
         </div>
       </div>`
     );

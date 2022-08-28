@@ -45,3 +45,6 @@ export default Page {
 }
 
 ```
+
+
+- 'sub-elements' are wrappers for components to position them into the page markup

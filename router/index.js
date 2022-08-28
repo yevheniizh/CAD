@@ -53,7 +53,7 @@ export default class Router {
 
     if ( this.page ) {
       const element = await this.page.render();
-      const contentNode = document.querySelector('#content');
+      const contentNode = document.querySelector('#page-content');
 
       contentNode.innerHTML = '';
       contentNode.append(element);

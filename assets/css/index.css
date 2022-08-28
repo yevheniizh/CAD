@@ -1,15 +1,21 @@
 @import './normalize.css';
-@import './variables.css';
-@import './main.css';
+@import './spacing.css';
+@import './colors.css';
 @import './mixins.css';
+@import './main.css';
 
 /* Components */
 @import '../../components/accordion/index.css';
 @import '../../components/button/index.css';
 @import '../../components/input/index.css';
 @import '../../components/notification/index.css';
+@import '../../components/logo/index.css';
+@import '../../components/page/index.css';
 
 /* Containers */
 @import '../../containers/auth-form/index.css';
 @import '../../containers/nav-area/index.css';
 @import '../../containers/history-panel/index.css';
+
+/* Pages */
+@import '../../pages/auth/index.css';

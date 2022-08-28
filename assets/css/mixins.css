@@ -3,6 +3,12 @@
   min-width: 100%;
 }
 
+.container {
+  margin: 0 auto;
+  max-width: 1120px;
+  padding: 0 8px;
+}
+
 .pos-centered {
   position: absolute;
   top: 50%;

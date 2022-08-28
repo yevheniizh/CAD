@@ -1,5 +1,6 @@
 export const EContainerName = {
-  authForm: 'authForm',
+  form: 'form',
+  logo: 'logo',
 }
 
 export default class AuthForm {
@@ -18,39 +19,59 @@ export default class AuthForm {
           <h2 class="auth-form__title pos-centered--ver">Log in</h2>
         </header>
 
-        <button class="button button_large button_secondary fullwidth">
+        <button class="auth-form__google-button
+          button button_large button_secondary
+          fullwidth"
+        >
           <img src="../../assets/icons/google.svg" alt="Google icon">
           <span>Log in with Google</span>
         </button>
 
+        <div class="auth-form__divider">
+          <i>or</i>
+        </div>
+
         <form class="form">
-          <label for="email">Email</label>
-          <input
-            class="input"
-            id="email"
-            type="email"
-            placeholder="Enter your email"
-            required
-          ></input>
-          <div>
-            <img src="../../assets/icons/error.svg" alt="Error icon">
-            <span class="hint">User is not found</span>
+          <div class="auth-form__input">
+            <label class="label" for="email">
+              <span class="label-text">Email</span>
+              <input
+                class="input"
+                id="email"
+                type="email"
+                placeholder="Enter your email"
+                required
+              ></input>
+              <div class="auth-form__input-info input-info">
+                <img src="../../assets/icons/error.svg" alt="Error icon">
+                <span class="hint">User is not found</span>
+              </div>
+            </label>
           </div>
-          <label for="password">Password</label>
-          <input
-            class="input"
-            id="password"
-            type="password"
-            placeholder="Enter your password"
-            required
-            minlength="6"
-            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$"
-          ></input>
-          <div>
-            <img src="../../assets/icons/error.svg" alt="Error icon">
-            <span class="hint">Wrong password</span>
+
+          <div class="auth-form__input">
+            <label class="label" for="password">
+              <span class="label-text">Password</span>
+              <input
+                class="input"
+                id="password"
+                type="password"
+                placeholder="Enter your password"
+                required
+                minlength="6"
+                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$"
+              ></input>
+              <div class="auth-form__input-info input-info">
+                <img src="../../assets/icons/error.svg" alt="Error icon">
+                <span class="hint">Wrong password</span>
+              </div>
+            </label>
           </div>
-          <button type="submit" class="button button_large button_primary">Log in</button>
+
+          <div class="auth-form__submit">
+            <a class="link">Forgot the password?</a>
+            <button type="submit" class="button button_large button_primary">Log in</button>
+          </div>
         </form>
       </div>`
     );

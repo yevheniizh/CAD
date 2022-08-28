@@ -18,7 +18,7 @@ export default class CanvasPage {
 
   get template () {
     return (
-      `<div class="canvas">
+      `<div class="canvas-page page">
         <canvas class="canvas" data-element=${ECanvasSubElements.canvas}></canvas>
         
         <!-- Tools panel -->

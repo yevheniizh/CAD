@@ -53,9 +53,13 @@ body {
   background-color: var( --gray-5 );
 }
 
-/* main {
-  flex-grow: 1;
-} */
+.root-page {
+  padding: 0 8px;
+}
+
+.root-page .page-content {
+  grid-column: col-start 1 / col-end 12;
+}
 
 .canvas {
   position: absolute;
@@ -65,4 +69,18 @@ body {
   height: 100%;
   -webkit-mask-image: radial-gradient(black 70%, rgba(0, 0, 0, 0.5) 100%);
   mask-image: radial-gradient(black 70%, rgba(0, 0, 0, 0.5) 100%);
+}
+
+.link {
+  text-decoration: underline;
+  color: var( --gray-primary );
+  font-size: 18px;
+  line-height: var( --space-7 );
+  font-weight: 400;
+}
+
+.link:hover,
+.link:active {
+  cursor: pointer;
+  text-decoration: none;
 }
