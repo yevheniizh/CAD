@@ -5,24 +5,29 @@
 
 .container {
   margin: 0 auto;
-  max-width: 1120px;
+  max-width: var( --container-max, 1200px );
   padding: 0 8px;
 }
 
-.pos-centered {
+/* .container {
+  width: min(100% - var( --space-4 ), var( --container-max ) );
+  margin-inline: auto;
+} */
+
+.absolute-centered {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate( -50%, -50% );
 }
 
-.pos-centered--hor {
+.absolute-centered--hor {
   position: absolute;
   left: 50%;
   transform: translate( -50%, 0 );
 }
 
-.pos-centered--ver {
+.absolute-centered--ver {
   position: absolute;
   top: 50%;
   transform: translate( 0, -50% );

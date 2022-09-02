@@ -1,6 +1,8 @@
 @import './normalize.css';
-@import './spacing.css';
 @import './colors.css';
+@import './fonts.css';
+@import './spacing.css';
+@import './variables.css';
 @import './mixins.css';
 @import './main.css';
 

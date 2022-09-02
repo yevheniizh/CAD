@@ -16,7 +16,7 @@ export default class AuthForm {
     element.innerHTML = (
       `<div class="auth-form">
         <header class="auth-form__header">
-          <h2 class="auth-form__title pos-centered--ver">Log in</h2>
+          <h2 class="auth-form__title absolute-centered--ver">Log in</h2>
         </header>
 
         <button class="auth-form__google-button

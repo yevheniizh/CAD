@@ -4,4 +4,5 @@
   column-gap: 16px;
   grid-template-columns: repeat(12, [col-start] 1fr [col-end]);
   grid-template-rows: minmax(100%, auto);
+  padding: 0 8px;
 }
