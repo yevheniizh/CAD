@@ -1,0 +1,45 @@
+.grid {
+  position: relative;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(12, [col-start] 1fr [col-end]);
+  grid-template-rows: minmax(100%, auto);
+  column-gap: var( --space-4 );
+  padding: 0 var( --space-2 );
+}
+
+.grid > * {
+  position: absolute;
+  inset: 0;
+  --col-start: 1;
+  --span: 1;
+  --col-end: var( --col-start ) + var( --span ) - 1;
+  grid-column-start: col-start min( var( --col-start ), 12);
+  grid-column-end:   col-end   min( var( --col-end ), 12);
+}
+
+.col-1  { --col-start: 1; }
+.col-2  { --col-start: 2; }
+.col-3  { --col-start: 3; }
+.col-4  { --col-start: 4; }
+.col-5  { --col-start: 5; }
+.col-6  { --col-start: 6; }
+.col-7  { --col-start: 7; }
+.col-8  { --col-start: 8; }
+.col-9  { --col-start: 9; }
+.col-10 { --col-start: 10; }
+.col-11 { --col-start: 11; }
+.col-12 { --col-start: 12; }
+
+.span-1  { --span: 1; }
+.span-2  { --span: 2; }
+.span-3  { --span: 3; }
+.span-4  { --span: 4; }
+.span-5  { --span: 5; }
+.span-6  { --span: 6; }
+.span-7  { --span: 7; }
+.span-8  { --span: 8; }
+.span-9  { --span: 9; }
+.span-10 { --span: 10; }
+.span-11 { --span: 11; }
+.span-12 { --span: 12; }

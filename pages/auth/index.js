@@ -13,11 +13,11 @@ export default class AuthPage {
 
   get template () {
     return (
-      `<div class="auth-page page">
-        <div class="auth-page__logo" data-element="${EContainerName.logo}">
+      `<div class="auth-page grid">
+        <div class="auth-page__logo col-2 span-2" data-element="${EContainerName.logo}">
           <img class="logo__img" src="../../assets/icons/logo.svg" alt="App logo">
         </div>
-        <div class="auth-page__form" data-element="${EContainerName.form}">
+        <div class="auth-page__form col-5 span-4" data-element="${EContainerName.form}">
           <!-- Auth-form component -->
         </div>
       </div>`

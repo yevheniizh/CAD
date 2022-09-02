@@ -3,6 +3,7 @@
 @import './fonts.css';
 @import './spacing.css';
 @import './variables.css';
+@import './grid.css';
 @import './mixins.css';
 @import './main.css';
 
@@ -12,7 +13,6 @@
 @import '../../components/input/index.css';
 @import '../../components/notification/index.css';
 @import '../../components/logo/index.css';
-@import '../../components/page/index.css';
 
 /* Containers */
 @import '../../containers/auth-form/index.css';

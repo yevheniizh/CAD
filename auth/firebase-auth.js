@@ -1,16 +1,7 @@
-import {
-  getAuth,
-  signOut,
-  onAuthStateChanged,
-  signInWithPopup,
-  setPersistence,
-  GoogleAuthProvider,
-  browserSessionPersistence,
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-} from 'https://www.gstatic.com/firebasejs/9.9.0/firebase-auth.js'
+import { app } from "./firebase-init";
+import { getAuth, signOut, onAuthStateChanged, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 
-const auth = getAuth();
+const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
 export const formGoogleSignIn = () => {

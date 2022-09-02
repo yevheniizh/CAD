@@ -1,15 +1,12 @@
 .auth-page {
-  grid-column: col-start 1 / col-end 12;
+  padding: 0;
 }
 
 .auth-page__form {
-  grid-column: col-start 5 / col-end 8;
   display: flex;
 }
 
 .auth-page__logo {
-  grid-column: col-start 2 / col-end 3;
-  position: relative;
   top: var( --space-20 );
   width: var( --space-39 );
   height: var( --space-8 );
