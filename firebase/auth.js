@@ -1,4 +1,4 @@
-import { app } from "./firebase-init";
+import { app } from "./init";
 import { getAuth, signOut, onAuthStateChanged, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 
 const auth = getAuth(app);

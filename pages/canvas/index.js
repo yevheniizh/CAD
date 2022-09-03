@@ -1,7 +1,7 @@
 import { defaultCursor, orbitOrPanCursor, setBackground, toggleAnimation, zoom } from "./eventListeners.js";
 
 import { ECanvasSubElements } from "../../models/canvas-manager/enums.js";
-import { formGoogleSignIn } from "../../auth/firebase-auth.js";
+import { formSignOut } from "../../firebase/auth.js";
 
 import CanvasManager from "../../models/canvas-manager/index.js";
 import CommandManager from "../../models/command-manager/index.js";
@@ -149,7 +149,7 @@ export default class CanvasPage {
     /* SCENE EVENTS */
       this.subElements[ECanvasSubElements.animationButton].addEventListener('click', toggleAnimation.bind(this))
       this.subElements[ECanvasSubElements.colorPickerButton].addEventListener('change', setBackground.bind(this));
-      this.subElements[ECanvasSubElements.googleButton].addEventListener('click', formGoogleSignIn);
+      this.subElements[ECanvasSubElements.logOut].addEventListener('click', logOut);
   }
 
   removeEventListeners() {
@@ -167,7 +167,7 @@ export default class CanvasPage {
     /* SCENE EVENTS */
       this.subElements[ECanvasSubElements.animationButton].addEventListener('click', toggleAnimation.bind(this))
       this.subElements[ECanvasSubElements.colorPickerButton].addEventListener('change', setBackground.bind(this));
-      this.subElements[ECanvasSubElements.googleButton].addEventListener('click', formGoogleSignIn);
+      this.subElements[ECanvasSubElements.signOutButton].addEventListener('click', formSignOut);
   }
 
   destroy () {

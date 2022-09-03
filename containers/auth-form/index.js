@@ -59,6 +59,7 @@ export default class AuthForm {
                 placeholder="Enter your password"
                 required
                 minlength="6"
+                minlength="20"
                 pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$"
               ></input>
               <div class="auth-form__input-info input-info">
@@ -69,7 +70,7 @@ export default class AuthForm {
           </div>
 
           <div class="auth-form__submit">
-            <a class="link">Forgot the password?</a>
+            <a class="link" href="/">Forgot the password?</a>
             <button type="submit" class="button button_large button_primary">Log in</button>
           </div>
         </form>

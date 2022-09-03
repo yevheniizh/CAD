@@ -42,9 +42,9 @@ export const ECanvasSubElements = {
   clearButton: 'clearButton',
   colorPickerButton: 'colorPickerButton',
   figureButton: 'figureButton',
-  googleButton: 'googleButton',
   historyPanel: 'historyPanel',
   redoButton: 'redoButton',
   undoButton: 'undoButton',
   wireframeButton: 'wireframeButton',
+  signOutButton: 'signOutButton',
 }

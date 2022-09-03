@@ -1,4 +1,4 @@
-import { app } from "./firebase-init";
+import { app } from "./init";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
 
 const db = getFirestore(app);
