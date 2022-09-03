@@ -21,7 +21,7 @@ class RootPage {
     return (
       `<div class="root-page grid">
         <!-- Some static elements can be added here as well: header, footer, aside, etc. -->
-        <main class="page-content col-1 span-12" id="page-content">
+        <main class="page-content col-1/12" id="page-content">
           <!-- Page content -->
         </main>
       </div>`

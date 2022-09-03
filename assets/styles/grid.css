@@ -1,45 +1,44 @@
 .grid {
+  --col-gap: var( --space-4 );
+  --columns: calc( var( --col-end ) - var( --col-start ) + 1 );
   position: relative;
   height: 100%;
   display: grid;
-  grid-template-columns: repeat(12, [col-start] 1fr [col-end]);
+  grid-template-columns: repeat(var( --columns , 12 ), [col-start] 1fr [col-end]);
   grid-template-rows: minmax(100%, auto);
-  column-gap: var( --space-4 );
-  padding: 0 var( --space-2 );
+  column-gap: var( --col-gap );
+  padding: 0 calc( 0.5 * var( --col-gap ) );
 }
 
 .grid > * {
   position: absolute;
   inset: 0;
-  --col-start: 1;
-  --span: 1;
-  --col-end: var( --col-start ) + var( --span ) - 1;
-  grid-column-start: col-start min( var( --col-start ), 12);
-  grid-column-end:   col-end   min( var( --col-end ), 12);
+  grid-column-start: col-start var( --col-start, 1 );
+  grid-column-end:   col-end   var( --col-end, 1 );
 }
 
-.col-1  { --col-start: 1; }
-.col-2  { --col-start: 2; }
-.col-3  { --col-start: 3; }
-.col-4  { --col-start: 4; }
-.col-5  { --col-start: 5; }
-.col-6  { --col-start: 6; }
-.col-7  { --col-start: 7; }
-.col-8  { --col-start: 8; }
-.col-9  { --col-start: 9; }
-.col-10 { --col-start: 10; }
-.col-11 { --col-start: 11; }
-.col-12 { --col-start: 12; }
+[class*="col-1/"]  { --col-start: 1; }
+[class*="col-2/"]  { --col-start: 2; }
+[class*="col-3/"]  { --col-start: 3; }
+[class*="col-4/"]  { --col-start: 4; }
+[class*="col-5/"]  { --col-start: 5; }
+[class*="col-6/"]  { --col-start: 6; }
+[class*="col-7/"]  { --col-start: 7; }
+[class*="col-8/"]  { --col-start: 8; }
+[class*="col-9/"]  { --col-start: 9; }
+[class*="col-10/"] { --col-start: 10; }
+[class*="col-11/"] { --col-start: 11; }
+[class*="col-12/"] { --col-start: 12; }
 
-.span-1  { --span: 1; }
-.span-2  { --span: 2; }
-.span-3  { --span: 3; }
-.span-4  { --span: 4; }
-.span-5  { --span: 5; }
-.span-6  { --span: 6; }
-.span-7  { --span: 7; }
-.span-8  { --span: 8; }
-.span-9  { --span: 9; }
-.span-10 { --span: 10; }
-.span-11 { --span: 11; }
-.span-12 { --span: 12; }
+[class*="/1"]  { --col-end: 1; }
+[class*="/2"]  { --col-end: 2; }
+[class*="/3"]  { --col-end: 3; }
+[class*="/4"]  { --col-end: 4; }
+[class*="/5"]  { --col-end: 5; }
+[class*="/6"]  { --col-end: 6; }
+[class*="/7"]  { --col-end: 7; }
+[class*="/8"]  { --col-end: 8; }
+[class*="/9"]  { --col-end: 9; }
+[class*="/10"] { --col-end: 10; }
+[class*="/11"] { --col-end: 11; }
+[class*="/12"] { --col-end: 12; }
