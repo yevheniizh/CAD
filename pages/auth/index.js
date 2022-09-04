@@ -7,6 +7,7 @@ export default class AuthPage {
 
   initComponents () {
     const form = new AuthForm();
+    form.observer.subscribe(() => this.renderComponent(EContainerName.form));
 
     this.components[EContainerName.form] = form;
   }
@@ -20,6 +21,9 @@ export default class AuthPage {
         <div class="auth-page__form col-5/8" data-element="${EContainerName.form}">
           <!-- Auth-form component -->
         </div>
+        <div class="auth-page__nav col-9/11" data-element="${EContainerName.nav}">
+          <!-- Auth nav component -->
+        </div>
       </div>`
     );
   }
@@ -32,22 +36,21 @@ export default class AuthPage {
     this.subElements = this.getSubElements(this.element);
 
     this.initComponents();
-
     this.renderComponents();
-
-    this.subElements = this.getSubElements(this.element);
-
-    this.initEventListeners();
 
     return this.element;
   }
 
+  renderComponent(component) {
+    const root = this.subElements[component];
+    const { element } = this.components[component];
+
+    root.append(element);
+  }
+
   renderComponents () {
     Object.keys(this.components).forEach(component => {
-      const root = this.subElements[component];
-      const { element } = this.components[component];
-
-      root.append(element);
+      this.renderComponent(component);
     });
   }
 
@@ -60,8 +63,6 @@ export default class AuthPage {
       return accum;
     }, {});
   }
-
-  initEventListeners() {}
 
   removeEventListeners() {}
 
