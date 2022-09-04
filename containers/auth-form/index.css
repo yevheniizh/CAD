@@ -3,13 +3,11 @@
   flex: 1;
 }
 
-.auth-form > *,
-.form > * {
+.auth-form > * {
   margin-bottom: var( --space-8 );
 }
 
-.auth-form > *:last-child,
-.form > *:last-child {
+.auth-form > *:last-child {
   margin-bottom: auto;
 }
 
@@ -22,6 +20,10 @@
   margin: var( --space-0 );
   font-size: var( --space-10 );
   font-weight: 800;
+}
+
+.auth-form__description {
+  font-size: 18px;
 }
 
 .auth-form__divider {
@@ -49,5 +51,8 @@
 .auth-form__submit {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+}
+
+.auth-form__submit > *:last-child {
+  margin-left: auto;
 }
