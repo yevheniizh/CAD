@@ -1,4 +1,10 @@
-import AuthForm, { EContainerName } from "../../containers/auth-form/index.js";
+import AuthForm from "../../containers/auth-form/index.js";
+
+export const EAuthPageComponents = {
+  form: 'form',
+  logo: 'logo',
+  nav: 'nav',
+}
 
 export default class AuthPage {
   element;
@@ -7,21 +13,20 @@ export default class AuthPage {
 
   initComponents () {
     const form = new AuthForm();
-    form.observer.subscribe(() => this.renderComponent(EContainerName.form));
-
-    this.components[EContainerName.form] = form;
+    this.components[EAuthPageComponents.form] = form;
+    form.emitter.subscribe('render', () => this.renderComponent(EAuthPageComponents.form));
   }
 
   get template () {
     return (
       `<div class="auth-page grid">
-        <div class="auth-page__logo col-2/3" data-element="${EContainerName.logo}">
+        <div class="auth-page__logo col-2/3" data-element="${EAuthPageComponents.logo}">
           <img class="logo__img" src="../../assets/icons/logo.svg" alt="App logo">
         </div>
-        <div class="auth-page__form col-5/8" data-element="${EContainerName.form}">
+        <div class="auth-page__form col-5/8" data-element="${EAuthPageComponents.form}">
           <!-- Auth-form component -->
         </div>
-        <div class="auth-page__nav col-9/11" data-element="${EContainerName.nav}">
+        <div class="auth-page__nav col-9/11" data-element="${EAuthPageComponents.nav}">
           <!-- Auth nav component -->
         </div>
       </div>`

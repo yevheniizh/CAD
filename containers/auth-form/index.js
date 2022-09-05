@@ -1,10 +1,5 @@
 import { authPageStates, EAuthPageStates } from './templates.js';
-
-export const EContainerName = {
-  form: 'form',
-  logo: 'logo',
-  nav: 'nav',
-}
+import EventEmitter from '../../utils/eventEmitter.util.js';
 
 export const EAuthSubElements = {
   googleButton: 'googleButton',
@@ -16,32 +11,21 @@ export const EAuthSubElements = {
   submitButton: 'submitButton',
 }
 
-class Observer {
-  events = [];  // observers
-
-  subscribe (fn) {
-    this.events.push(fn);
-  }
-
-  unsubscribe(fn) {
-    this.events = this.events.filter( (event) => event !== fn );
-  }
-
-  fire(args) {
-    this.events.forEach(function (event) {
-      event.call(null, args);
-    });
-  }
-}
-
 export default class AuthForm {
   element;
   subElements = {};
-  observer = new Observer();
+  emitter = new EventEmitter(); // to collect subscribers
+
+  onForgotPasswordClick = ( event ) => {
+    const title = event.target.closest(`[data-element=${EAuthSubElements.title}]`);
+    if (!title) return;
+    
+    this.render(EAuthPageStates.forgotPassword);
+    this.emitter.emit('render'); // fire 
+  }
 
   constructor({state = EAuthPageStates.logIn} = {}) {
     this.render(state);
-    this.initEventListeners();
   }
 
   emailInputTemplate() {
@@ -54,6 +38,7 @@ export default class AuthForm {
           type="email"
           placeholder="Enter your email"
           required
+          autocomplete
         ></input>
         <div class="auth-form__input-info input-info">
           <img src="../../assets/icons/error.svg" alt="Error icon">
@@ -78,6 +63,7 @@ export default class AuthForm {
           minlength="6"
           minlength="20"
           pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$"
+          autocomplete
         ></input>
         <div class="auth-form__input-info input-info">
           <img src="../../assets/icons/error.svg" alt="Error icon">
@@ -137,15 +123,15 @@ export default class AuthForm {
   }
 
   render(state) {
-    if (this.element) {
-      this.remove();
-    }
+    if (this.element) this.remove();
     
     const element = document.createElement('div');
     element.innerHTML = this.getTemplate(state);
     this.element = element.firstElementChild;
 
     this.subElements = this.getSubElements(this.element);
+
+    this.initEventListeners();
   }
 
   getSubElements ($element) {
@@ -159,15 +145,23 @@ export default class AuthForm {
   }
 
   initEventListeners() {
-    const { title } = this.subElements;
+    this.element.addEventListener('click', this.onForgotPasswordClick );
+  }
 
-    title.addEventListener('click', () => {
-      this.render(EAuthPageStates.linkSent);
-      this.observer.fire(this.render, this.element);
-    } );
+  removeEventListeners() {
+    this.element.removeEventListener('click', this.onForgotPasswordClick );
   }
 
   remove() {
     this.element.remove();
+  }
+
+  destroy() {
+    this.removeEventListeners();
+    this.remove();
+
+    this.element = null;
+    this.subElements = {};
+    this.emitter = null;
   }
 }
