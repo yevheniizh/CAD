@@ -1,11 +1,11 @@
-import Router from "./router/index.js";
+import Router from "./router/index";
 
-import CanvasPage from "./pages/canvas/index.js";
-import AuthPage from "./pages/auth/index.js";
-import ErrorPage from "./pages/error404.js";
+import CanvasPage from "./pages/canvas/index";
+import AuthPage from "./pages/auth/index";
+import ErrorPage from "./pages/error404";
 
 class RootPage {
-  router!: Router;
+  router: Router;
   element!: Element;
 
   onToggleAccordion( event ) {

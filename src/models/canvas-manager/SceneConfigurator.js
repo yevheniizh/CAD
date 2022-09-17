@@ -1,6 +1,6 @@
 import * as THREE from "./threejs/three.module.js";
 
-import { catchError } from '../../src/utils/error.util.js';
+import { catchError } from '../../utils/error.util.js';
 import { isAlreadyOnScene } from "./helpers.js";
 import { ECanvasSubElements } from "./enums.js";
 

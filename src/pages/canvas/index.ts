@@ -1,22 +1,17 @@
-import { defaultCursor, orbitOrPanCursor, setBackground, toggleAnimation, zoom } from "./eventListeners.js";
+import { defaultCursor, orbitOrPanCursor, setBackground, toggleAnimation, zoom } from "./eventListeners";
 
-import { ECanvasSubElements } from "../../../models/canvas-manager/enums.js";
-import { formSignOut } from "../../../firebase/auth.js";
+import { ECanvasSubElements } from "../../models/canvas-manager/enums";
+import { formSignOut } from "../../firebase/auth";
 
-import CanvasManager from "../../../models/canvas-manager/index.js";
-import CommandManager from "../../../models/command-manager/index.js";
+import CanvasManager from "../../models/canvas-manager/index";
+import CommandManager from "../../models/command-manager/index";
+import { Page } from "../../containers/auth-form/abstracts";
 
-export default class CanvasPage {
-  element;
-  subElements = {};
-  components = {};
+export default class CanvasPage extends Page {
+  canvasManager: CanvasManager | null = null;
+  commandManager: CommandManager | null = null;
 
-  canvasManager = null;
-  commandManager = null;
-
-  async initComponents () {}
-
-  get template () {
+  template () {
     return (
       `<div class="canvas-page page">
         <canvas class="canvas" data-element=${ECanvasSubElements.canvas}></canvas>
@@ -79,7 +74,7 @@ export default class CanvasPage {
               <li>
                 <button
                   class='button google'
-                  data-element=${ECanvasSubElements.googleButton}
+                  data-element=${ECanvasSubElements.signOutButton}
                 >Google Sign In</button>
               </li>
             </ul>
@@ -94,48 +89,20 @@ export default class CanvasPage {
     );
   }
 
-  async render () {
-    const element = document.createElement('div');
-    element.innerHTML = this.template;
-    this.element = element.firstElementChild;
+  initComponents () {}
 
-    this.subElements = this.getSubElements(this.element);
+  render () {
+    super.render()
 
-    await this.initComponents();
-
-    this.renderComponents();
-
-    this.subElements = this.getSubElements(this.element);
-
-    this.initEventListeners();
-
-    this.canvasManager = new CanvasManager({context: this});
-    this.commandManager = new CommandManager(this.canvasManager);
+    this.canvasManager = new CanvasManager( { context: this } );
+    this.commandManager = new CommandManager( this.canvasManager );
 
     return this.element;
   }
 
-  renderComponents () {
-    Object.keys(this.components).forEach(component => {
-      const root = this.subElements[component];
-      const { element } = this.components[component];
-
-      root.append(element);
-    });
-  }
-
-  getSubElements ($element) {
-    const elements = $element.querySelectorAll('[data-element]');
-
-    return [...elements].reduce((accum, subElement) => {
-      accum[subElement.dataset.element] = subElement;
-
-      return accum;
-    }, {});
-  }
-
   initEventListeners() {
     /* MOUSE EVENTS */
+    console.log('XXX',  this.subElements);
       // Zoom - zoom-in / zoom-out cursor
       this.subElements[ECanvasSubElements.canvas].addEventListener('wheel', zoom.bind(this)); // Chrome, Firefox
       this.subElements[ECanvasSubElements.canvas].addEventListener('gesturestart', zoom.bind(this)); // Safari
@@ -149,7 +116,7 @@ export default class CanvasPage {
     /* SCENE EVENTS */
       this.subElements[ECanvasSubElements.animationButton].addEventListener('click', toggleAnimation.bind(this))
       this.subElements[ECanvasSubElements.colorPickerButton].addEventListener('change', setBackground.bind(this));
-      this.subElements[ECanvasSubElements.logOut].addEventListener('click', logOut);
+      this.subElements[ECanvasSubElements.signOutButton].addEventListener('click', formSignOut);
   }
 
   removeEventListeners() {
@@ -168,12 +135,5 @@ export default class CanvasPage {
       this.subElements[ECanvasSubElements.animationButton].addEventListener('click', toggleAnimation.bind(this))
       this.subElements[ECanvasSubElements.colorPickerButton].addEventListener('change', setBackground.bind(this));
       this.subElements[ECanvasSubElements.signOutButton].addEventListener('click', formSignOut);
-  }
-
-  destroy () {
-    for (const component of Object.values(this.components)) {
-      component.destroy();
-    }
-    this.removeEventListeners();
   }
 }

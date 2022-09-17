@@ -68,6 +68,10 @@ const config = {
           cleanOnceBeforeBuildPatterns: [path.join(__dirname, "dist")],
         }),
   ],
+
+  resolve: {
+    extensions: ['.ts', '.js'],
+  },
 };
 
 module.exports = config;

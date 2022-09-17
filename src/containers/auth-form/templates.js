@@ -1,11 +1,4 @@
-export const EAuthPageStates = {
-  logIn: 'logIn',
-  signUp: 'signUp',
-  forgotPassword: 'forgotPassword',
-  changePassword: 'changePassword',
-  passwordChanged: 'passwordChanged',
-  linkSent: 'linkSent',
-}
+import { EAuthPageStates } from "./enums";
 
 export const authPageStates = {
   [EAuthPageStates.logIn]: {

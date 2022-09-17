@@ -1,31 +1,25 @@
-import { authPageStates, EAuthPageStates } from './templates.js';
-import EventEmitter from '../../utils/eventEmitter.util.js';
+import { authPageStates } from './templates';
+import { EAuthFormEmitterEvents, EAuthSubElements, EAuthPageStates } from './enums';
+import EventEmitter from '../../utils/eventEmitter.util';
+import { Component } from './abstracts';
 
-export const EAuthSubElements = {
-  googleButton: 'googleButton',
-  title: 'title',
-  description: 'description',
-  emailInput: 'emailInput',
-  passwordInput: 'passwordInput',
-  repeatPasswordInput: 'repeatPasswordInput',
-  submitButton: 'submitButton',
-}
-
-export default class AuthForm {
-  element;
-  subElements = {};
-  emitter = new EventEmitter(); // to collect subscribers
+export default class AuthForm extends Component {
+  emitter: EventEmitter | null = new EventEmitter(); // to collect subscribers
 
   onForgotPasswordClick = ( event ) => {
     const title = event.target.closest(`[data-element=${EAuthSubElements.title}]`);
-    if (!title) return;
+    if ( !title ) return;
     
-    this.render(EAuthPageStates.forgotPassword);
-    this.emitter.emit('render'); // fire 
-  }
+    this.state = { ...this.state, name: EAuthPageStates.forgotPassword };
+    super.render();
 
-  constructor({state = EAuthPageStates.logIn} = {}) {
-    this.render(state);
+    this.emitter?.emit(EAuthFormEmitterEvents.render);
+  }
+  
+  constructor() {
+    super();
+    this.state = { name: EAuthPageStates.logIn };
+    super.render();
   }
 
   emailInputTemplate() {
@@ -46,6 +40,10 @@ export default class AuthForm {
         </div>
       </label>`
     );
+  }
+
+  template() {
+    return this.getTemplate();
   }
 
   passwordInputTemplate({isRepeat = false} = {}) {
@@ -73,8 +71,9 @@ export default class AuthForm {
     );
   }
 
-  getTemplate(state) {
-    const { title, elements } = authPageStates[state];
+  getTemplate() {
+    const { title, elements } = authPageStates[this.state?.name];
+
     const { googleButton, divider, description, emailInput, passwordInput, repeatPasswordInput, submitButton } = elements;
 
     return (
@@ -115,53 +114,23 @@ export default class AuthForm {
             </div>`)
           : ''}
         <div class="auth-form__submit" data-element=${EAuthSubElements.submitButton}>
-          ${state === EAuthPageStates.logIn ? `<a class="link" href="/">${submitButton.description}</a>` : '' }
+          ${this.state?.name === EAuthPageStates.logIn ? `<a class="link" href="/">${submitButton.description}</a>` : '' }
           <button type="submit" class="button button_large button_primary">${submitButton.text}</button>
         </div>
       </form>`
     );
   }
 
-  render(state) {
-    if (this.element) this.remove();
-    
-    const element = document.createElement('div');
-    element.innerHTML = this.getTemplate(state);
-    this.element = element.firstElementChild;
-
-    this.subElements = this.getSubElements(this.element);
-
-    this.initEventListeners();
-  }
-
-  getSubElements ($element) {
-    const elements = $element.querySelectorAll('[data-element]');
-
-    return [...elements].reduce((accum, subElement) => {
-      accum[subElement.dataset.element] = subElement;
-
-      return accum;
-    }, {});
-  }
-
   initEventListeners() {
-    this.element.addEventListener('click', this.onForgotPasswordClick );
+    this.element?.addEventListener('click', this.onForgotPasswordClick ); 
   }
 
   removeEventListeners() {
-    this.element.removeEventListener('click', this.onForgotPasswordClick );
-  }
-
-  remove() {
-    this.element.remove();
+    this.element?.removeEventListener('click', this.onForgotPasswordClick );
   }
 
   destroy() {
-    this.removeEventListeners();
-    this.remove();
-
-    this.element = null;
-    this.subElements = {};
+    super.destroy();
     this.emitter = null;
   }
 }
