@@ -5,6 +5,9 @@ import AuthPage from "./pages/auth/index.js";
 import ErrorPage from "./pages/error404.js";
 
 class RootPage {
+  router!: Router;
+  element!: Element;
+
   onToggleAccordion( event ) {
     const accordionButton = event.target.closest(".a-button");
     accordionButton?.parentNode.classList.toggle("active");
@@ -32,7 +35,7 @@ class RootPage {
     const element = document.createElement('div');
     element.innerHTML = this.template;
 
-    this.element = element.firstElementChild;
+    this.element = element.firstElementChild!;
     document.body.append(this.element);
   }
 

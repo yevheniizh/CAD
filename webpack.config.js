@@ -11,8 +11,8 @@ const config = {
   devtool: isProduction ? "source-map" : "eval-cheap-module-source-map",
 
   entry: {
-    app: path.join(__dirname, 'index.js'),
-    styles: path.join(__dirname, './assets/styles/index.css')
+    app: path.join(__dirname, './src/index.ts'),
+    styles: path.join(__dirname, './src/assets/styles/index.css')
   },
   output: {
     path: isProduction
@@ -33,9 +33,14 @@ const config = {
         },
       },
       {
-        test: /\.(js|ts)x?$/,
-        loader: require.resolve("babel-loader"),
+        test: /\.js$/i,
         exclude: /node_modules/,
+        use:      ['babel-loader', 'source-map-loader'],
+      },
+      {
+        test: /\.ts$/i,
+        exclude: /node_modules/,
+        use:      ['babel-loader', 'ts-loader'],
       },
       {
         test: /\.css$/i,
@@ -50,10 +55,10 @@ const config = {
       "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
     }),
     new CopyWebpackPlugin({
-      patterns: [{ from: "assets", to: "assets" }],
+      patterns: [{ from: "./src/assets", to: "assets" }],
     }),
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, "index.html"),
+      template: path.join(__dirname, "./src/index.html"),
     }),
 
     // CLEAN 'DIST' FOLDER IN DEVELOPMENT MODE

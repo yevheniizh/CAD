@@ -27,6 +27,8 @@
     "webpack-dev-server": "^4.2.0"
   },
   "dependencies": {
-    "firebase": "^9.9.4"
+    "firebase": "^9.9.4",
+    "source-map-loader": "^4.0.0",
+    "ts-loader": "^9.3.1"
   }
 }
