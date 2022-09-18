@@ -1,4 +1,4 @@
-import {IBasicComponent} from  "../containers/auth-form/abstracts";
+import { IBasicComponent } from  "../containers/auth-form/typings";
 
 export default class implements IBasicComponent {
   element;

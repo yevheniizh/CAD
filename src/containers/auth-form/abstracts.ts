@@ -1,42 +1,15 @@
-export interface ISubElements {
-  [key: string]: HTMLElement;
-}
+import { IComponent, IComponents, IPage, IProps, IState, ISubElements } from "./typings";
 
-export interface IComponents {
-  [key: string]: IComponent;
-}
+// NOTE: move to models ?
 
-export interface IState {
-  name: string;
-}
-
-export interface IProps {}
-
-export interface IBasicComponent {
-  element: HTMLElement | null;
-  render(): void;
-}
-
-export interface IComponent extends IBasicComponent {
-  state?: IState;
-  props?: IProps;
-  subElements: ISubElements;
-  template(): string;
-  initEventListeners(): void;
-  removeEventListeners(): void;
-  getSubElements( element: Element ): ISubElements;
-  remove(): void;
-  destroy(): void;
-}
-
-export abstract class Component implements IComponent {
-  state?: IState;
-  props?: IProps;
+export abstract class Component<P = IProps, S = IState> implements IComponent<P, S> {
+  state?: S;
+  props?: P;
   element: HTMLElement | null = null;
   subElements: ISubElements = {};
 
-  constructor( props: IProps = {} ) {
-    if( Object.keys( props ).length ) this.props = props;
+  constructor( props?: P ) {
+    if( props && Object.keys( props ).length ) this.props = props;
   }
 
   abstract template(): string;
@@ -79,13 +52,6 @@ export abstract class Component implements IComponent {
     this.element = null;
     this.subElements = {};
   }
-}
-
-export interface IPage extends Omit<IComponent, 'state' | 'props'> {
-  components: IComponents;
-  renderComponent( component: string ): void;
-  renderComponents(): void;
-  initComponents(): void;
 }
 
 export abstract class Page extends Component implements IPage {

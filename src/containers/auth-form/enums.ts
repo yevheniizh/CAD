@@ -1,8 +1,8 @@
-export enum EAuthFormEmitterEvents {
+export enum EEmitterEvents {
   render = 'render',
 }
 
-export enum EAuthPageStates {
+export enum EStates {
   logIn = 'logIn',
   signUp = 'signUp',
   forgotPassword = 'forgotPassword',
@@ -11,12 +11,15 @@ export enum EAuthPageStates {
   linkSent = 'linkSent',
 }
 
-export enum EAuthSubElements {
+export enum ESubElements {
   googleButton = 'googleButton',
   title = 'title',
+  descriprion = 'descriprion',
+  divider = 'divider',
   description =  'description',
   emailInput = 'emailInput',
   passwordInput = 'passwordInput',
   repeatPasswordInput =   'repeatPasswordInput',
   submitButton ='submitButton',
+  navButton = 'navButton',
 }

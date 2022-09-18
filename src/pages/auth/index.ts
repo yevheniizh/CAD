@@ -1,5 +1,5 @@
 import AuthForm from "../../containers/auth-form/index";
-import { EAuthFormEmitterEvents } from "../../containers/auth-form/enums";
+import { EEmitterEvents } from "../../containers/auth-form/enums";
 import { Page } from "../../containers/auth-form/abstracts";
 
 export const EAuthPageComponents = {
@@ -12,7 +12,8 @@ export default class AuthPage extends Page {
   initComponents () {
     const form = new AuthForm();
     this.components[EAuthPageComponents.form] = form;
-    form.emitter!.subscribe(EAuthFormEmitterEvents.render, () => this.renderComponent(EAuthPageComponents.form) );
+    // listen to internal render call, and paste rerendered component to the page
+    form.emitter!.subscribe(EEmitterEvents.render, () => this.renderComponent(EAuthPageComponents.form) );
   }
 
   template () {
