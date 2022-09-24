@@ -1,5 +1,5 @@
+import { IState } from "../../models/typings";
 import { EStates, ESubElements } from "./enums";
-import { IState } from "./typings";
 
 export type ISubElementData = {
   text:        string;

@@ -1,3 +1,7 @@
+export enum EEmitterEvents {
+  render = 'render',
+}
+
 interface IEmitterEvents {
   [eventName: string]: Function[];
 }

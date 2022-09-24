@@ -1,7 +1,7 @@
+import { Component } from '../../../models/components';
 import { IInputData, IOwnState, states } from '../templates';
-import { EEmitterEvents, ESubElements, EStates } from '../enums';
-import EventEmitter from '../../../utils/eventEmitter.util';
-import { Component } from '../abstracts';
+import { ESubElements, EStates } from '../enums';
+import EventEmitter, { EEmitterEvents } from '../../../utils/eventEmitter.util';
 
 export default class AuthForm extends Component<undefined, IOwnState> { 
   emitter: EventEmitter | null = new EventEmitter(); // to collect subscribers
@@ -12,7 +12,7 @@ export default class AuthForm extends Component<undefined, IOwnState> {
 
     this.emitter?.emit(EEmitterEvents.render, [EStates.forgotPassword] );
   }
-  
+
   constructor() {
     super();
     this.state = { ...states[EStates.logIn] };
@@ -124,7 +124,7 @@ export default class AuthForm extends Component<undefined, IOwnState> {
   }
 
   initEventListeners() {
-    this.element?.addEventListener('click', this.onForgotPasswordClick ); 
+    this.element?.addEventListener('click', this.onForgotPasswordClick );
   }
 
   removeEventListeners() {

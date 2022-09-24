@@ -1,7 +1,3 @@
-export enum EEmitterEvents {
-  render = 'render',
-}
-
 export enum EStates {
   logIn = 'logIn',
   signUp = 'signUp',
@@ -14,12 +10,11 @@ export enum EStates {
 export enum ESubElements {
   googleButton = 'googleButton',
   title = 'title',
-  descriprion = 'descriprion',
   divider = 'divider',
-  description =  'description',
+  description = 'description',
   emailInput = 'emailInput',
   passwordInput = 'passwordInput',
-  repeatPasswordInput =   'repeatPasswordInput',
-  submitButton ='submitButton',
+  repeatPasswordInput = 'repeatPasswordInput',
+  submitButton = 'submitButton',
   navButton = 'navButton',
 }

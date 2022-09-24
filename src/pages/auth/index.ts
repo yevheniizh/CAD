@@ -1,13 +1,8 @@
-import { AuthForm, AuthNav } from "../../containers/auth-form";
-import { EEmitterEvents } from "../../containers/auth-form/enums";
-import { Page } from "../../containers/auth-form/abstracts";
-import { navStates, states } from "../../containers/auth-form/templates";
-
-export const EAuthPageComponents = {
-  form: 'form',
-  logo: 'logo',
-  nav: 'nav',
-}
+import { Page } from "../../models/components";
+import { navStates, states } from "../../containers/auth/templates";
+import { AuthForm, AuthNav } from "../../containers/auth";
+import { EEmitterEvents } from "../../utils/eventEmitter.util";
+import { EAuthPageComponents } from "./typings";
 
 export default class AuthPage extends Page {
   initComponents () {

@@ -15,7 +15,7 @@
 @import '../../components/logo/index.css';
 
 /* Containers */
-@import '../../containers/auth-form/index.css';
+@import '../../containers/auth/components/form.css';
 @import '../../containers/nav-area/index.css';
 @import '../../containers/history-panel/index.css';
 

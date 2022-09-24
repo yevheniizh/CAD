@@ -1,4 +1,4 @@
-import { BasicComponent } from "../containers/auth-form/abstracts";
+import { BasicComponent } from "../models/components";
 
 export default class extends BasicComponent {
   element;

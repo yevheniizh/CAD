@@ -1,7 +1,5 @@
 import { IBasicComponent, IComponent, IComponents, IPage, IProps, IState, ISubElements } from "./typings";
 
-// NOTE: move to models ?
-
 export abstract class BasicComponent<P = IProps, S = IState> implements IBasicComponent<P, S> {
   state?: S;
   props?: P;

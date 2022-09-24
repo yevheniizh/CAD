@@ -1,11 +1,11 @@
 import { defaultCursor, orbitOrPanCursor, setBackground, toggleAnimation, zoom } from "./eventListeners";
 
-import { ECanvasSubElements } from "../../models/canvas-manager/enums";
+import { ECanvasSubElements } from "../../managers/canvas-manager/enums";
 import { formSignOut } from "../../firebase/auth";
 
-import CanvasManager from "../../models/canvas-manager/index";
-import CommandManager from "../../models/command-manager/index";
-import { Page } from "../../containers/auth-form/abstracts";
+import CanvasManager from "../../managers/canvas-manager/index";
+import CommandManager from "../../managers/command-manager/index";
+import { Page } from "../../models/components";
 
 export default class CanvasPage extends Page {
   canvasManager: CanvasManager | null = null;
