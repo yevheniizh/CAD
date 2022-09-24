@@ -2,7 +2,7 @@ import { EStates, ESubElements } from "./enums";
 import { IState } from "./typings";
 
 export type ISubElementData = {
-  text?:        string;
+  text:        string;
   description?: string;
 };
 
@@ -53,10 +53,6 @@ export const states: IOwnStates = {
       navButton: {
         text: 'Forgot the password?',
       },
-      // navButton: {
-      //   text: 'Sign up',
-      //   description: 'Don’t have an account?',
-      // },
     }
   },
   [EStates.signUp]: {
@@ -80,10 +76,6 @@ export const states: IOwnStates = {
       submitButton: {
         text: 'Sign up',
       },
-      // navButton: {
-      //   text: 'Log in',
-      //   description: 'Already have an account?',
-      // },
     },
   },
   [EStates.forgotPassword]: {
@@ -100,9 +92,6 @@ export const states: IOwnStates = {
       submitButton: {
         text: 'Send a recovery link',
       },
-      // navButton: {
-      //   text: 'Back to Log in',
-      // },
     },
   },
   [EStates.changePassword]: {
@@ -143,6 +132,46 @@ export const states: IOwnStates = {
       },
       submitButton: {
         text: 'Go to Log in',
+      },
+    },
+  },
+};
+
+export interface INavState extends IState {
+  name:     EStates;
+  elements: {
+    [ESubElements.navButton]: ISubElementData,
+  };
+};
+
+export type INavStates = {
+  [key in EStates]: INavState;
+};
+
+export const navStates: Partial<INavStates> = {
+  [EStates.logIn]: {
+    name: EStates.logIn,
+    elements: {
+      navButton: {
+        text: 'Sign up',
+        description: 'Don’t have an account?',
+      },
+    }
+  },
+  [EStates.signUp]: {
+    name: EStates.signUp,
+    elements: {
+      navButton: {
+        text: 'Log in',
+        description: 'Already have an account?',
+      },
+    },
+  },
+  [EStates.forgotPassword]: {
+    name: EStates.forgotPassword,
+    elements: {
+      navButton: {
+        text: 'Back to Log in',
       },
     },
   },

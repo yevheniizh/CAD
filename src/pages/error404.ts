@@ -1,6 +1,6 @@
-import { IBasicComponent } from  "../containers/auth-form/typings";
+import { BasicComponent } from "../containers/auth-form/abstracts";
 
-export default class implements IBasicComponent {
+export default class extends BasicComponent {
   element;
 
   async render () {

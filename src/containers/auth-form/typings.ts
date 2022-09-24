@@ -3,7 +3,7 @@ export interface ISubElements {
 }
 
 export interface IComponents {
-  [key: string]: IComponent;
+  [key: string]: IComponent | IBasicComponent;
 }
 
 export interface IState {
@@ -12,21 +12,21 @@ export interface IState {
 
 export interface IProps {}
 
-export interface IBasicComponent {
-  element: HTMLElement | null;
-  render(): void;
-}
-
-export interface IComponent<P = IProps, S = IState> extends IBasicComponent {
+export interface IBasicComponent<P = IProps, S = IState> {
   state?: S;
   props?: P;
-  subElements: ISubElements;
-  template(): string;
+  element: HTMLElement | null;
   initEventListeners(): void;
   removeEventListeners(): void;
-  getSubElements( element: Element ): ISubElements;
+  render(): void;
   remove(): void;
   destroy(): void;
+}
+
+export interface IComponent<P = IProps, S = IState> extends IBasicComponent<P, S> {
+  subElements: ISubElements;
+  template(): string;
+  getSubElements( element: Element ): ISubElements;
 }
 
 export interface IPage extends Omit<IComponent, 'state' | 'props'> {

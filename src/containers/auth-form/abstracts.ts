@@ -1,22 +1,43 @@
-import { IComponent, IComponents, IPage, IProps, IState, ISubElements } from "./typings";
+import { IBasicComponent, IComponent, IComponents, IPage, IProps, IState, ISubElements } from "./typings";
 
 // NOTE: move to models ?
 
-export abstract class Component<P = IProps, S = IState> implements IComponent<P, S> {
+export abstract class BasicComponent<P = IProps, S = IState> implements IBasicComponent<P, S> {
   state?: S;
   props?: P;
   element: HTMLElement | null = null;
-  subElements: ISubElements = {};
 
   constructor( props?: P ) {
     if( props && Object.keys( props ).length ) this.props = props;
   }
 
-  abstract template(): string;
-
   initEventListeners() {}; // not required
   
   removeEventListeners() {}; // not required
+
+  abstract render(): void;
+
+  remove() {
+    this.element?.remove();
+  }
+
+  destroy() {
+    this.removeEventListeners();
+    this.remove();
+
+    this.element = null;
+  }
+}
+
+export abstract class Component<P = IProps, S = IState> extends BasicComponent<P, S> implements IComponent<P, S> {
+  element: HTMLElement | null = null;
+  subElements: ISubElements = {};
+
+  constructor() {
+    super();
+  }
+
+  abstract template(): string;
 
   render() {
     if ( this.element ) this.remove();
@@ -41,15 +62,8 @@ export abstract class Component<P = IProps, S = IState> implements IComponent<P,
     }, {} as ISubElements);
   }
 
-  remove() {
-    this.element?.remove();
-  }
-
   destroy() {
-    this.removeEventListeners();
-    this.remove();
-
-    this.element = null;
+    super.destroy();
     this.subElements = {};
   }
 }
@@ -70,6 +84,8 @@ export abstract class Page extends Component implements IPage {
 
   renderComponent( component: keyof IComponents ) {
     const root = this.subElements[component];
+
+    this.components[component].render();
     const { element } = this.components[component];
 
     root.append(element!);

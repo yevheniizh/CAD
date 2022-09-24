@@ -1,6 +1,7 @@
-import AuthForm from "../../containers/auth-form/index";
+import { AuthForm, AuthNav } from "../../containers/auth-form";
 import { EEmitterEvents } from "../../containers/auth-form/enums";
 import { Page } from "../../containers/auth-form/abstracts";
+import { navStates, states } from "../../containers/auth-form/templates";
 
 export const EAuthPageComponents = {
   form: 'form',
@@ -11,9 +12,21 @@ export const EAuthPageComponents = {
 export default class AuthPage extends Page {
   initComponents () {
     const form = new AuthForm();
+    const nav = new AuthNav();
     this.components[EAuthPageComponents.form] = form;
-    // listen to internal render call, and paste rerendered component to the page
-    form.emitter!.subscribe(EEmitterEvents.render, () => this.renderComponent(EAuthPageComponents.form) );
+    this.components[EAuthPageComponents.nav] = nav;
+
+    // Change component state & render
+    form.emitter!.subscribe(EEmitterEvents.render, ([state]: any[]) => {
+      this.components[EAuthPageComponents.form].state = states[state];
+      this.renderComponent(EAuthPageComponents.form );
+    } );
+
+    // Change component state & render
+    form.emitter!.subscribe(EEmitterEvents.render, ([state]: any[]) => {
+      this.components[EAuthPageComponents.nav].state = navStates[state];
+      this.renderComponent(EAuthPageComponents.nav );
+    } );
   }
 
   template () {
@@ -26,7 +39,6 @@ export default class AuthPage extends Page {
           <!-- Auth-form component -->
         </div>
         <div class="auth-page__nav col-9/11" data-element="${EAuthPageComponents.nav}">
-          <!-- Auth nav component -->
         </div>
       </div>`
     );
