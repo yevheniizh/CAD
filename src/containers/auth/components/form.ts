@@ -1,21 +1,23 @@
 import { Component } from '../../../models/components';
-import { IInputData, IOwnState, states } from '../templates';
-import { ESubElements, EStates } from '../enums';
-import EventEmitter, { EEmitterEvents } from '../../../utils/eventEmitter.util';
+import { IInputData, IOwnState } from '../templates';
+import { ESubElements } from '../enums';
+import { EEmitterEvents } from '../../../utils/eventEmitter.util';
+import { EAuthPageComponents } from '../../../pages/auth/enums';
 
-export default class AuthForm extends Component<undefined, IOwnState> { 
-  emitter: EventEmitter | null = new EventEmitter(); // to collect subscribers
-
-  onForgotPasswordClick = ( event ) => {
-    const title = event.target.closest(`[data-element=${ESubElements.navButton}]`);
-    if ( !title ) return;
-
-    this.emitter?.emit(EEmitterEvents.render, [EStates.forgotPassword] );
+export default class AuthForm extends Component<undefined, IOwnState> {
+  onSubElementClick = ( event ) => {
+    const { element } = event.target.closest( '[data-element]' )?.dataset;
+    
+    if ( element /* && element.clickable */) {
+      this.page.emitter?.emit(EEmitterEvents.setState, element );
+    }
   }
 
-  constructor() {
+  page: any;
+
+  constructor( page ) {
     super();
-    this.state = { ...states[EStates.logIn] };
+    this.page = page;
   }
 
   emailInputTemplate( { label, placeholder }: IInputData ) {
@@ -24,7 +26,6 @@ export default class AuthForm extends Component<undefined, IOwnState> {
         <span class="label-text">${label}</span>
         <input
           class="input"
-          id="email"
           type="email"
           placeholder="${placeholder}"
           required
@@ -48,7 +49,6 @@ export default class AuthForm extends Component<undefined, IOwnState> {
         <span class="label-text">${label}</span>
         <input
           class="input"
-          id="password"
           type="password"
           placeholder="${placeholder}"
           required
@@ -69,7 +69,7 @@ export default class AuthForm extends Component<undefined, IOwnState> {
     const {
       title, googleButton, divider, description,
       emailInput, passwordInput, repeatPasswordInput, submitButton, navButton,
-    } = states[this.state!.name].elements;
+    } = this.page.state.view.components.form;
 
     return (
       `<form class="auth-form">
@@ -116,7 +116,7 @@ export default class AuthForm extends Component<undefined, IOwnState> {
           : ''}
 
         <div class="auth-form__submit" data-element=${ESubElements.submitButton}>
-          ${navButton ? `<a class="link" data-element=${ESubElements.navButton}>${navButton.text}</a>` : '' }
+          ${navButton ? `<a class="link" data-element=${EAuthPageComponents.form}_${ESubElements.navButton}>${navButton.text}</a>` : '' }
           <button type="submit" class="button button_large button_primary">${submitButton.text}</button>
         </div>
       </form>`
@@ -124,15 +124,10 @@ export default class AuthForm extends Component<undefined, IOwnState> {
   }
 
   initEventListeners() {
-    this.element?.addEventListener('click', this.onForgotPasswordClick );
+    this.element?.addEventListener('click', this.onSubElementClick );
   }
 
   removeEventListeners() {
-    this.element?.removeEventListener('click', this.onForgotPasswordClick );
-  }
-
-  destroy() {
-    super.destroy();
-    this.emitter = null;
+    this.element?.removeEventListener('click', this.onSubElementClick );
   }
 }

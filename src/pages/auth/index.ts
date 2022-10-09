@@ -1,30 +1,46 @@
 import { Page } from "../../models/components";
-import { navStates, states } from "../../containers/auth/templates";
+import { IOwnState, viewes } from "../../containers/auth/templates";
 import { AuthForm, AuthNav } from "../../containers/auth";
-import { EEmitterEvents } from "../../utils/eventEmitter.util";
-import { EAuthPageComponents } from "./typings";
+import EventEmitter, { EEmitterEvents } from "../../utils/eventEmitter.util";
+import { ESubElements } from "../../containers/auth/enums";
+import { EAuthPageComponents, EViews } from "./enums";
 
-export default class AuthPage extends Page {
-  initComponents () {
-    const form = new AuthForm();
-    const nav = new AuthNav();
+export default class AuthPage extends Page<undefined, IOwnState> {
+  emitter: EventEmitter | null = new EventEmitter();
+
+  constructor(){
+    super();
+    this.state = {
+      name: 'auth', // TODO: enums
+      view: { ...viewes[EViews.logIn] }
+    };
+  }
+
+  initComponents() {
+    const form = new AuthForm(this);
+    const nav = new AuthNav(this);
     this.components[EAuthPageComponents.form] = form;
     this.components[EAuthPageComponents.nav] = nav;
 
-    // Change component state & render
-    form.emitter!.subscribe(EEmitterEvents.render, ([state]: any[]) => {
-      this.components[EAuthPageComponents.form].state = states[state];
-      this.renderComponent(EAuthPageComponents.form );
-    } );
+    // Change page state & rerender components
+    this.emitter!.subscribe(EEmitterEvents.setState, ( element: ESubElements ) => {
+      const [component, subComponent] = element.split('_');
+      const redirect  = this.state?.view.redirects?.[component][subComponent];
 
-    // Change component state & render
-    form.emitter!.subscribe(EEmitterEvents.render, ([state]: any[]) => {
-      this.components[EAuthPageComponents.nav].state = navStates[state];
-      this.renderComponent(EAuthPageComponents.nav );
+      console.log('OOO', {element, redirect});
+      
+      if ( redirect ) {
+        this.setView( redirect );
+      }
     } );
   }
 
-  template () {
+  setView(view: EViews ) {
+    this.state = { ...this.state, view: viewes[view] } as IOwnState;
+    this.renderComponents();
+  }
+
+  template() {
     return (
       `<div class="auth-page grid">
         <div class="auth-page__logo col-2/3" data-element="${EAuthPageComponents.logo}">
@@ -37,5 +53,10 @@ export default class AuthPage extends Page {
         </div>
       </div>`
     );
+  }
+
+  destroy() {
+    super.destroy();
+    this.emitter = null;
   }
 }

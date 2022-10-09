@@ -1,5 +1,6 @@
 export enum EEmitterEvents {
   render = 'render',
+  setState = 'setState',
 }
 
 interface IEmitterEvents {
@@ -21,8 +22,8 @@ export default class EventEmitter {
     this.events[eventName] = this.events[eventName].filter( eventCallback => callback !== eventCallback );
   }
   
-  emit( eventName: TEmitterEventsKeys, args?: any[] ) {
+  emit( eventName: TEmitterEventsKeys, ...args ) {
     const event = this.events[eventName];
-    event && event.forEach( callback => callback.call( null, args ) );
+    event && event.forEach( callback => callback.call( null, ...args ) );
   }
 }

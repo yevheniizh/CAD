@@ -66,7 +66,7 @@ export abstract class Component<P = IProps, S = IState> extends BasicComponent<P
   }
 }
 
-export abstract class Page extends Component implements IPage {
+export abstract class Page<P = IProps, S = IState> extends Component<P, S> implements IPage<P, S> {
   components: IComponents = {};
 
   render() {

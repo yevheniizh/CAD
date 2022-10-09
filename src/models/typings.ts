@@ -29,7 +29,7 @@ export interface IComponent<P = IProps, S = IState> extends IBasicComponent<P, S
   getSubElements( element: Element ): ISubElements;
 }
 
-export interface IPage extends Omit<IComponent, 'state' | 'props'> {
+export interface IPage<P = IProps, S = IState> extends Omit<IComponent, 'state' | 'props'> {
   components: IComponents;
   renderComponent( component: string ): void;
   renderComponents(): void;
