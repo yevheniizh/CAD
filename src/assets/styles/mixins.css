@@ -9,26 +9,9 @@
   padding: 0 8px;
 }
 
-/* .container {
-  width: min(100% - var( --space-4 ), var( --container-max ) );
-  margin-inline: auto;
-} */
-
 .absolute-centered {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate( -50%, -50% );
-}
-
-.absolute-centered--hor {
-  position: absolute;
-  left: 50%;
-  transform: translate( -50%, 0 );
-}
-
-.absolute-centered--ver {
-  position: absolute;
-  top: 50%;
-  transform: translate( 0, -50% );
 }

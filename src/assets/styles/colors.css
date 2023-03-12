@@ -6,19 +6,6 @@
   --gray-4: rgb(68, 68, 68);
   --gray-5: rgb(170, 170, 170);
 
-  /* Design */
-  --blue-primary: rgb(28, 161, 203);
-  --blue-shade-1: rgb(27, 132, 166);
-  --blue-tint-1: rgb(80, 191, 226);
-  --gray-primary: rgb(58, 58, 58);
-  --gray-tint-1: rgb(105, 105, 105);
-  --gray-tint-2: rgb(157, 157, 157);
-  --gray-tint-3: rgb(195, 195, 195);
-  --gray-tint-4: rgb(224, 224, 224);
-  --gray-tint-5: rgb(241, 241, 241);
-  --white: rgb(255, 255, 255);
-  --red: rgb(229, 103, 103);
-
   /* Notifications */
   --info-color: 119, 119, 119;
   --success-color: 68, 204, 17;

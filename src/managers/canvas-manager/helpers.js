@@ -1,4 +1,4 @@
-import * as THREE from "./threejs/three.module.js";
+import * as THREE from "../../libs/three.module.js";
 
 export function isAlreadyOnScene(uuid) {
   return !!this.canvas?.scene?.children.some(item => item.uuid === uuid );

@@ -2,8 +2,8 @@
 // import * as THREE from "https://cdn.skypack.dev/three@0.132.2";
 // import { OrbitControls } from "https://cdn.skypack.dev/three@0.132.2/examples/jsm/controls/OrbitControls.js";
 
-import * as THREE from "./threejs/three.module.js";
-import { OrbitControls } from "./threejs/OrbitControls.js";
+import * as THREE from "../../libs/three.module.js";
+import { OrbitControls } from "../../libs/OrbitControls.js";
 
 import { SceneConfigurator } from "./SceneConfigurator.js";
 import { ShapesConfigurator } from "./ShapesConfigurator.js";

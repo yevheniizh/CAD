@@ -1,4 +1,4 @@
-import Perlin from "./threejs/perlin.js";
+import Perlin from "../../libs/perlin.js";
 import { isShape } from "./helpers.js";
 
 export class AnimationConfigurator {

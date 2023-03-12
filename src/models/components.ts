@@ -27,6 +27,9 @@ export abstract class BasicComponent<P = IProps, S = IState> implements IBasicCo
   }
 }
 
+
+
+
 export abstract class Component<P = IProps, S = IState> extends BasicComponent<P, S> implements IComponent<P, S> {
   element: HTMLElement | null = null;
   subElements: ISubElements = {};
@@ -65,6 +68,9 @@ export abstract class Component<P = IProps, S = IState> extends BasicComponent<P
     this.subElements = {};
   }
 }
+
+
+
 
 export abstract class Page<P = IProps, S = IState> extends Component<P, S> implements IPage<P, S> {
   components: IComponents = {};

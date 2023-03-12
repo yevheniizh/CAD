@@ -1,7 +1,6 @@
 import Router from "./router/index";
 
 import CanvasPage from "./pages/canvas/index";
-import AuthPage from "./pages/auth/index";
 import ErrorPage from "./pages/error404";
 
 class RootPage {
@@ -22,9 +21,8 @@ class RootPage {
 
   get template () {
     return (
-      `<div class="root-page grid">
-        <!-- Some static elements can be added here as well: header, footer, aside, etc. -->
-        <main class="page-content col-1/12" id="page-content">
+      `<div class="root-page">
+        <main class="page-content" id="page-content">
           <!-- Page content -->
         </main>
       </div>`
@@ -41,9 +39,8 @@ class RootPage {
 
   initializeRouter() {
     this.router
-      // .addRoute('/', new CanvasPage())
-      .addRoute('/', new AuthPage())
-      .addRoute('/auth', new AuthPage())
+      .addRoute('/', new CanvasPage())
+      // .addRoute('/auth', new AuthPage())
       .addRoute('/404', new ErrorPage())
       .setNotFoundPagePath('/404')
       .listen();

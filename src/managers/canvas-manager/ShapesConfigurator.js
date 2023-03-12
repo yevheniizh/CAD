@@ -1,4 +1,4 @@
-import * as THREE from "./threejs/three.module.js";
+import * as THREE from "../../libs/three.module.js";
 import { geometriesMap, materialsMap } from "./enums.js";
 import { isAlreadyOnConfig, isAlreadyOnScene, isShape } from "./helpers.js";
 

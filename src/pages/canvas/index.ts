@@ -1,7 +1,6 @@
 import { defaultCursor, orbitOrPanCursor, setBackground, toggleAnimation, zoom } from "./eventListeners";
 
 import { ECanvasSubElements } from "../../managers/canvas-manager/enums";
-import { formSignOut } from "../../firebase/auth";
 
 import CanvasManager from "../../managers/canvas-manager/index";
 import CommandManager from "../../managers/command-manager/index";
@@ -101,8 +100,9 @@ export default class CanvasPage extends Page {
   }
 
   initEventListeners() {
+
     /* MOUSE EVENTS */
-    console.log('XXX',  this.subElements);
+
       // Zoom - zoom-in / zoom-out cursor
       this.subElements[ECanvasSubElements.canvas].addEventListener('wheel', zoom.bind(this)); // Chrome, Firefox
       this.subElements[ECanvasSubElements.canvas].addEventListener('gesturestart', zoom.bind(this)); // Safari
@@ -114,9 +114,10 @@ export default class CanvasPage extends Page {
       this.subElements[ECanvasSubElements.canvas].addEventListener('mouseup', defaultCursor.bind(this));
 
     /* SCENE EVENTS */
+    
       this.subElements[ECanvasSubElements.animationButton].addEventListener('click', toggleAnimation.bind(this))
       this.subElements[ECanvasSubElements.colorPickerButton].addEventListener('change', setBackground.bind(this));
-      this.subElements[ECanvasSubElements.signOutButton].addEventListener('click', formSignOut);
+      // this.subElements[ECanvasSubElements.signOutButton].addEventListener('click', formSignOut);
   }
 
   removeEventListeners() {
@@ -134,6 +135,6 @@ export default class CanvasPage extends Page {
     /* SCENE EVENTS */
       this.subElements[ECanvasSubElements.animationButton].addEventListener('click', toggleAnimation.bind(this))
       this.subElements[ECanvasSubElements.colorPickerButton].addEventListener('change', setBackground.bind(this));
-      this.subElements[ECanvasSubElements.signOutButton].addEventListener('click', formSignOut);
+      // this.subElements[ECanvasSubElements.signOutButton].addEventListener('click', formSignOut);
   }
 }
