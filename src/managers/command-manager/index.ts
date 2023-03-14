@@ -3,13 +3,14 @@ import { CommandHistory } from "./CommandHistory.js";
 import { setUuid } from "../canvas-manager/helpers.js";
 import { initConfig } from "../canvas-manager/initConfig.js";
 import { ECanvasSubElements } from "../canvas-manager/enums.js";
-import { Notification } from "../../components/notification/index.js";
+import { Notification, INotificationProps } from "../../components/notification";
 
 /**
  * CommandManager needs to handle the order of user operations with objects on the canvas.
  * And it defines event listeners on commands.
  */
 export default class CommandManager {
+  [x: string]: any;
   constructor( canvas ) {
     this.canvas = canvas;
     this.addEventListeners();
@@ -93,13 +94,12 @@ export default class CommandManager {
     if (!!command) {
       command.undo();
     } else {
-      this.showNotification( 'Nothing to undo' );
+      this.showNotification( {text: 'Nothing to undo'} );
     }
   }
 
-  showNotification(text, { duration = 1500, type } = {}) {
-    const notification = new Notification( text, { duration, type } );
-    notification.show();
+  showNotification(props: INotificationProps) {
+    Notification.show(props);
   }
 
   redo() {
@@ -108,7 +108,7 @@ export default class CommandManager {
     if (!!command) {
       command.redo();
     } else {
-      this.showNotification( 'Nothing to redo' );
+      this.showNotification( {text: 'Nothing to redo'} );
     }
   }
 }
